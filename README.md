@@ -24,7 +24,7 @@ To train the model from scratch for 100 iterations:
 ```
 python train_network.py \
 --training-image-dset data/training_images.h5 \
---style-images data/starry-night. \
+--style-images data/starry-night.jpg \
 --weights-checkpoint data/starry_night_keras_weights.h5 \
 --img-height 256 \
 --img-width 256 \
@@ -43,4 +43,14 @@ python train_network.py \
 --img-width 256 \
 --num-iterations 100 \
 --fine-tune
+```
+
+# Stylizing Images
+To stylize an image with a trained model you can run:
+
+```
+python stylize_image.py \
+--input-image data/test.jpg \
+--output-image data/stylized_test.jpg \
+--weights-checkpoint data/starry_night_keras_weights.h5
 ```

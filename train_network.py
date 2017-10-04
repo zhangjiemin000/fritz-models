@@ -107,7 +107,7 @@ if __name__ == '__main__':
         args.img_height, args.img_width
     )
     if args.fine_tune and os.path.exists(args.weights_checkpoint):
-        logger.info('Loading weights from %s' % args.weights_checkpoint)
+        logger.info('Loading model weights from %s' % args.weights_checkpoint)
         transfer_net.load_weights(args.weights_checkpoint)
 
     model_trainer = trainer.Trainer(transfer_net)
