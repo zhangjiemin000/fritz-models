@@ -30,7 +30,6 @@ jupyter-client==5.1.0
 jupyter-console==5.1.0
 jupyter-core==4.3.0
 Keras==2.0.8
-keras-contrib==1.2.1
 Markdown==2.6.9
 MarkupSafe==1.0
 matplotlib==2.0.2
@@ -80,3 +79,4 @@ wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.12.2
 widgetsnbextension==2.0.0
+-e git@github.com:farizrahman4u/keras-contrib.git

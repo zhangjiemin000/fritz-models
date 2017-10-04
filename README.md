@@ -67,6 +67,7 @@ python convert_to_coreml.py \
 --weights-checkpoint data/starry_night_keras_weights.h5 \
 --coreml-model data/starry_night.mlmodel
 ```
+
 # TODO
-* Finish added conversion tools for Core ML
-* Clean up structure
+* Clean up directory structure
+* Clean up Core ML converter code
