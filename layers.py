@@ -1,4 +1,4 @@
-import keras.layers.Layer
+import keras
 
 
 class VGGNormalize(keras.layers.Layer):
@@ -33,10 +33,10 @@ class VGGNormalize(keras.layers.Layer):
         if reverse_channels:
             x = x[:, :, :, ::-1]
 
-        # center pixel values
-        x[:, :, :, 0] -= 103.939
-        x[:, :, :, 1] -= 116.779
-        x[:, :, :, 2] -= 123.68
+        # Center pixel values. Technically each channel should have its
+        # own center value, but the tensor computation is annoying so we'll
+        # just center them all with the same value.
+        x -= 120.0
 
         return x
 

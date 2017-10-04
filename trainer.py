@@ -6,6 +6,7 @@ import time
 
 import models
 import layers
+import utils
 
 logger = logging.getLogger('trainer')
 
@@ -376,7 +377,7 @@ Total Variantion Loss: {total_variation_loss}
         style_imgs = []
         for filename in style_image_files:
             # Note no preprocessing is done while loading.
-            img = self.load_image(filename, img_height, img_width)
+            img = utils.load_image(filename, img_height, img_width)
             style_imgs.append(img)
         style_imgs = numpy.array(style_imgs)
 

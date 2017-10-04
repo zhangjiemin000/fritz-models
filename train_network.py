@@ -5,6 +5,7 @@ import os
 import trainer
 import models
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('train_network')
 
 # The default layers are those suggested by Johnson et al.
@@ -32,16 +33,16 @@ if __name__ == '__main__':
         help='A comma separated list of images to take styles from.'
     )
     parser.add_argument(
+        '--weights-checkpoint', type=str, required=True,
+        help='An file to save the trained network weights to.'
+    )
+    parser.add_argument(
         '--img-height', default=256, type=int,
         help='The height of training images.'
     )
     parser.add_argument(
         '--img-width', default=256, type=int,
         help='The width of training images.'
-    )
-    parser.add_argument(
-        '--weights-checkpoint', type=str, required=True,
-        help='An file to save the trained network weights to.'
     )
     parser.add_argument(
         '--content-layers', type=str,
@@ -99,10 +100,10 @@ if __name__ == '__main__':
     if args.style_layers:
         style_layers = args.style_layers.split(',')
 
-    style_image_files = args.style_image_files.split(',')
+    style_image_files = args.style_images.split(',')
 
     # Create the Style Transfer Network to train.
-    transfer_net = models.StyleTransferNet.build(
+    transfer_net = models.StyleTransferNetwork.build(
         args.img_height, args.img_width
     )
     if args.fine_tune and os.path.exists(args.weights_checkpoint):
