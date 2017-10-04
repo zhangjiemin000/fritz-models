@@ -296,7 +296,9 @@ Total Variantion Loss: {total_variation_loss}
 
         # Now create a network model to extract style features.
         # The input tensor to this model will be fed data later on.
-        style_net = models.IntermediateVGG()
+        style_in = keras.layers.Input(shape=(img_height, img_width, 3))
+        style_in = layers.VGGNormalize()(style_in)
+        style_net = models.IntermediateVGG(input_tensor=style_in)
 
         # Finally, stitch the transfer model together with a VGG network to
         # extract features from the stylized image.
@@ -358,7 +360,7 @@ Total Variantion Loss: {total_variation_loss}
         # case, be careful at which values you pass when evaluating the model.
         inputs = [
             self.transfer_net.input,
-            style_net.model.input,
+            style_in,
             keras.backend.learning_phase()
         ]
 
