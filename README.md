@@ -55,6 +55,18 @@ python stylize_image.py \
 --weights-checkpoint data/starry_night_keras_weights.h5
 ```
 
+
+# Convert to Core ML
+Use the converter script to convert to Core ML.
+
+This converter is a slight modification of Apple's keras converter that allows
+the user to define custom conversions between Keras layers and core ml layers. This allows us to convert the Instance Normalization and Deprocessing layers.
+
+```
+python convert_to_coreml.py \
+--weights-checkpoint data/starry_night_keras_weights.h5 \
+--coreml-model data/starry_night.mlmodel
+```
 # TODO
 * Finish added conversion tools for Core ML
 * Clean up structure

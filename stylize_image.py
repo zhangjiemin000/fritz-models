@@ -26,7 +26,7 @@ if __name__ == '__main__':
     )
     parser.add_argument(
         '--weights-checkpoint', type=str, required=True,
-        help='Weights from a trained network.'
+        help='Weights from a trained Style Transfer Network.'
     )
     parser.add_argument(
         '--img-height', default=256, type=int,
