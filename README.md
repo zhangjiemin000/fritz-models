@@ -54,3 +54,7 @@ python stylize_image.py \
 --output-image data/stylized_test.jpg \
 --weights-checkpoint data/starry_night_keras_weights.h5
 ```
+
+# TODO
+* Finish added conversion tools for Core ML
+* Clean up structure
