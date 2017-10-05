@@ -7,6 +7,7 @@ import time
 import models
 import layers
 import utils
+import random
 
 logger = logging.getLogger('trainer')
 
@@ -391,7 +392,7 @@ Total Variantion Loss: {total_variation_loss}
         logger.info('Dataset has %d images.' % dataset_size)
 
         num_batches = int(numpy.ceil(dataset_size / batch_size))
-        batch_idx = 0
+        batch_idx = random.randrange(1, num_batches)
 
         iteration_ouputs = []
         for idx in range(num_iterations):
