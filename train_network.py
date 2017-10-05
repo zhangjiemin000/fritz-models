@@ -83,6 +83,10 @@ if __name__ == '__main__':
         help='the interval at which log statements are printed.'
     )
     parser.add_argument(
+        '--checkpoint-interval', type=int, default=10,
+        help='the interval at which model checkpoints are saved.'
+    )
+    parser.add_argument(
         '--fine-tune', action='store_true',
         help=('When present, attempt to load model weights from the checkpoint'
               'file and resume training from there. If no file exists, weights'
@@ -125,6 +129,7 @@ if __name__ == '__main__':
         batch_size=args.batch_size,
         num_iterations=args.num_iterations,
         learning_rate=args.learning_rate,
-        log_interval=args.log_interval
+        log_interval=args.log_interval,
+        checkpoint_interval=args.checkpoint_interval
     )
     logger.info('Done.')

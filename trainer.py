@@ -246,7 +246,8 @@ Total Variantion Loss: {total_variation_loss}
             num_iterations=5000,
             norm_by_channels=True,
             learning_rate=0.001,
-            log_interval=10):
+            log_interval=10,
+            checkpoint_interval=10):
         """Train the Transfer Network.
 
         The training procedure consists of iterating over images in
@@ -276,6 +277,8 @@ Total Variantion Loss: {total_variation_loss}
             learning_rate - the learning rate. Default 0.001
             log_interval -- the interval at which log statements are printed.
                             Default 10 iterations.
+            checkpoint_interval - the interval at which to save model
+                                  checkpoints. Default 10
         """
         logger.info('Setting up network for training.')
         logger.info('Content layers: %s' % ','.join(content_layers))
@@ -422,7 +425,12 @@ Total Variantion Loss: {total_variation_loss}
                     total_loss=out[0], content_loss=out[1],
                     style_loss=out[2], total_variation_loss=out[3])
                 )
-        # Save the trained weights of the transfer network model.
+
+            # Save the trained weights of the transfer network model.
+            if idx % checkpoint_interval == 0:
+                logger.info('Saving weights to %s' % weights_checkpoint_file)
+                self.transfer_net.save_weights(weights_checkpoint_file)
+        # Save one more time.
         logger.info('Saving weights to %s' % weights_checkpoint_file)
         self.transfer_net.save_weights(weights_checkpoint_file)
         return iteration_ouputs
