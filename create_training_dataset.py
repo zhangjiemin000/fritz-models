@@ -3,7 +3,7 @@ import h5py
 import logging
 import numpy
 import os
-from queue import Queue
+from Queue import Queue
 import sys
 import threading
 import urllib
