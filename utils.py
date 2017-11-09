@@ -22,7 +22,7 @@ def load_image(
         img - a numpy array representing the image.
     """
     img = PIL.Image.open(filename)
-    img = img.resize((height, width), resample=PIL.Image.BILINEAR)
+    img = img.resize((width, height), resample=PIL.Image.BILINEAR)
     img = numpy.array(img)
 
     if expand_dims:
