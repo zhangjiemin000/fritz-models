@@ -51,6 +51,22 @@ class StyleTransferNetwork(object):
         return keras.models.Model(inputs=x, outputs=out)
 
     @classmethod
+    def load_model(cls, filename):
+        """Load model from a saved model checkpoint.
+
+        Args:
+            filename - the height of the input and output image
+        Returns:
+            model - a keras model
+        """
+        custom_objects = {
+            'InstanceNormalization':
+                keras_contrib.layers.normalization.InstanceNormalization,
+            'DeprocessStylizedImage': layers.DeprocessStylizedImage
+        }
+        return keras.models.load_model(filename, custom_objects=custom_objects)
+
+    @classmethod
     def _convolution(
             cls, x, n_filters, kernel_size, strides=1,
             padding='same', relu=True):
