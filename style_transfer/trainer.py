@@ -434,6 +434,6 @@ Total Variantion Loss: {total_variation_loss}
                     include_optimizer=False
                 )
         # Save one more time.
-        logger.info('Saving weights to %s' % model_checkpoint_file)
-        self.transfer_net.save_weights(model_checkpoint_file)
+        logger.info('Saving model to %s' % model_checkpoint_file)
+        self.transfer_net.save(model_checkpoint_file)
         return iteration_ouputs
