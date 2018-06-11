@@ -1,7 +1,8 @@
 import coremltools
 from coremltools.converters.keras._keras2_converter import * 
-from coremltools.converters.keras._keras2_converter import _KERAS_LAYER_REGISTRY, _KERAS_SKIP_LAYERS
+from coremltools.converters.keras._keras2_converter import _KERAS_LAYER_REGISTRY
 from coremltools.converters.keras import _topology2
+from coremltools.converters.keras._topology2 import _KERAS_SKIP_LAYERS
 from coremltools.models.neural_network import NeuralNetworkBuilder as _NeuralNetworkBuilder
 from coremltools.proto import FeatureTypes_pb2 as _FeatureTypes_pb2
 from collections import OrderedDict as _OrderedDict
@@ -11,6 +12,7 @@ from coremltools.models.utils import save_spec as _save_spec
 import keras as _keras
 from coremltools._deps import HAS_KERAS2_TF as _HAS_KERAS2_TF
 import PIL.Image
+from six import string_types
 from coremltools.proto import FeatureTypes_pb2 as ft
 
 _IMAGE_SUFFIX = '_image'
@@ -157,7 +159,7 @@ class FritzCoremlConverter(object):
         Returns:
             mlmodel - a coreml model object.
         """
-        if isinstance(model, basestring):
+        if isinstance(model, string_types):
             model = _keras.models.load_model(model)
         elif isinstance(model, tuple):
             model = _load_keras_model(model[0], model[1])
@@ -190,18 +192,18 @@ class FritzCoremlConverter(object):
 
         # check input / output names validity
         if input_names is not None:
-            if isinstance(input_names, basestring):
+            if isinstance(input_names, string_types):
                 input_names = [input_names]
         else:
             input_names = ['input' + str(i + 1) for i in range(len(inputs))]
         if output_names is not None:
-            if isinstance(output_names, basestring):
+            if isinstance(output_names, string_types):
                 output_names = [output_names]
         else:
             output_names = ['output' + str(i + 1) for i in range(len(outputs))]
 
         if (image_input_names is not None and
-                isinstance(image_input_names, basestring)):
+                isinstance(image_input_names, string_types)):
             image_input_names = [image_input_names]
 
         graph.reset_model_input_names(input_names)
@@ -226,6 +228,7 @@ class FritzCoremlConverter(object):
 
         for idx, dim in enumerate(input_dims):
             unfiltered_shape = unfiltered_shapes[idx]
+            dim = list(dim)
             if len(dim) == 0:
                 # Used to be [None, None] before filtering; indicating
                 # unknown sequence length
@@ -261,38 +264,33 @@ class FritzCoremlConverter(object):
             output_dims = [filter(None, model.output_shape[1:])]
 
         for idx, dim in enumerate(output_dims):
+            dim = list(dim)
             if len(dim) == 1:
                 output_dims[idx] = dim
             elif len(dim) == 2:  # [Seq, D]
                 output_dims[idx] = (dim[1],)
             elif len(dim) == 3:
-                output_dims[idx] = (dim[2], dim[1], dim[0])
+                output_dims[idx] = (dim[2], dim[0], dim[1])
 
-        input_types = [datatypes.Array(*dim) for dim in input_dims]
-        output_types = [datatypes.Array(*dim) for dim in output_dims]
+            input_types = [datatypes.Array(*dim) for dim in input_dims]
+            output_types = [datatypes.Array(*dim) for dim in output_dims]
 
-        # Some of the feature handling is sensitive about string vs. unicode
-        input_names = map(str, input_names)
-        output_names = map(str, output_names)
-        is_classifier = class_labels is not None
-        if is_classifier:
-            mode = 'classifier'
-        else:
-            mode = None
+            # Some of the feature handling is sensitive about string vs unicode
+            input_names = map(str, input_names)
+            output_names = map(str, output_names)
+            is_classifier = class_labels is not None
+            if is_classifier:
+                mode = 'classifier'
+            else:
+                mode = None
 
-        _output_names = []
-        for name in output_names:
-            _output_names.append(name)
+            # assuming these match
+            input_features = list(zip(input_names, input_types))
+            output_features = list(zip(output_names, output_types))
 
-        # assuming these match
-        input_features = zip(input_names, input_types)
-        output_features = zip(_output_names, output_types)
-
-        builder = _NeuralNetworkBuilder(
-            input_features,
-            output_features,
-            mode=mode
-        )
+            builder = _NeuralNetworkBuilder(
+                input_features, output_features, mode=mode
+            )
 
         for iter, layer in enumerate(graph.layer_list):
             keras_layer = graph.keras_layer_map[layer]
@@ -323,7 +321,7 @@ class FritzCoremlConverter(object):
         # Add classifier classes (if applicable)
         if is_classifier:
             classes_in = class_labels
-            if isinstance(classes_in, basestring):
+            if isinstance(classes_in, string_types):
                 import os
                 if not os.path.isfile(classes_in):
                     raise ValueError(

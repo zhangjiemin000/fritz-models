@@ -1,10 +1,10 @@
 import argparse
 import keras_contrib
 import logging
+import keras
 
 from style_transfer import layer_converters
 from style_transfer import layers
-from style_transfer import models
 from style_transfer.fritz_coreml_converter import FritzCoremlConverter
 
 logging.basicConfig(level=logging.INFO)
@@ -15,22 +15,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Stylize an image using a trained model.'
     )
-
     parser.add_argument(
-        '--weights-checkpoint', type=str, required=True,
+        '--keras-checkpoint', type=str, required=True,
         help='Weights from a trained Style Transfer Network.'
     )
     parser.add_argument(
         '--coreml-model', type=str, required=True,
         help='A CoreML output file to save to'
-    )
-    parser.add_argument(
-        '--img-height', default=256, type=int,
-        help='The height of training images.'
-    )
-    parser.add_argument(
-        '--img-width', default=256, type=int,
-        help='The width of training images.'
     )
 
     args = parser.parse_args()
@@ -40,13 +31,17 @@ if __name__ == '__main__':
         keras_contrib.layers.normalization.InstanceNormalization: layer_converters.convert_instancenormalization,  # NOQA
         layers.DeprocessStylizedImage: layer_converters.convert_deprocessstylizedimage  # NOQA
     }
+    # Get custom layers so we can load the keras model config.
+    custom_objects = {
+        'InstanceNormalization': keras_contrib.layers.normalization.InstanceNormalization,  # NOQA
+        'DeprocessStylizedImage': layers.DeprocessStylizedImage
+    }
 
-    logger.info('Loading model weights from %s' % args.weights_checkpoint)
-    transfer_net = models.StyleTransferNetwork.build(
-        args.img_height, args.img_width
-    )
-    transfer_net.load_weights(args.weights_checkpoint)
+    logger.info('Loading model weights from %s' % args.keras_checkpoint)
 
+    transfer_net = keras.models.load_model(
+        args.keras_checkpoint,
+        custom_objects=custom_objects)
     fritz_converter = FritzCoremlConverter()
     mlmodel = fritz_converter.convert_keras(
         transfer_net,
