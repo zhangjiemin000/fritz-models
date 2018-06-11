@@ -25,7 +25,7 @@ To train the model from scratch for 100 iterations:
 python train_network.py \
 --training-image-dset data/training_images.h5 \
 --style-images data/starry-night.jpg \
---weights-checkpoint data/starry_night_keras_weights.h5 \
+--model-checkpoint data/starry_night_keras.h5 \
 --img-height 256 \
 --img-width 256 \
 --log-interval 1 \
@@ -38,7 +38,7 @@ If everything looks good, we can pick up where we left off and keep training the
 python train_network.py \
 --training-image-dset data/training_images.h5 \
 --style-images data/starry-night.jpg \
---weights-checkpoint data/starry_night_keras_weights.h5 \
+--model-checkpoint data/starry_night_keras.h5 \
 --img-height 256 \
 --img-width 256 \
 --num-iterations 100 \
@@ -52,7 +52,7 @@ To stylize an image with a trained model you can run:
 python stylize_image.py \
 --input-image data/test.jpg \
 --output-image data/stylized_test.jpg \
---weights-checkpoint data/starry_night_keras_weights.h5
+--model-checkpoint data/starry_night_keras.h5
 ```
 
 
@@ -64,7 +64,7 @@ the user to define custom conversions between Keras layers and core ml layers. T
 
 ```
 python convert_to_coreml.py \
---weights-checkpoint data/starry_night_keras_weights.h5 \
+--keras-checkpoint data/starry_night_keras.h5 \
 --coreml-model data/starry_night.mlmodel
 ```
 
