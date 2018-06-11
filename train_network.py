@@ -111,7 +111,7 @@ if __name__ == '__main__':
     style_image_files = args.style_images.split(',')
 
     # Create the Style Transfer Network to train.
-    if args.fine_tune and os.path.exists(args.weights_checkpoint):
+    if args.fine_tune and os.path.exists(args.model_checkpoint):
         logger.info('Loading model from %s' % args.model_checkpoint)
         transfer_net = models.StyleTransferNetwork.load_model(
             args.model_checkpoint
