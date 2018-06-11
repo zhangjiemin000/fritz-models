@@ -4,8 +4,8 @@ import logging
 import numpy
 import PIL.Image
 
-import models
-import utils
+from style_transfer import models
+from style_transfer import utils
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('stylize_image')

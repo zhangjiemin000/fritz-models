@@ -9,7 +9,7 @@ import threading
 import urllib
 import zipfile
 
-import utils
+from style_transfer import utils
 
 logger = logging.getLogger('create_training_dataset')
 

@@ -3,11 +3,11 @@ import keras
 import logging
 import numpy
 import time
-
-import models
-import layers
-import utils
 import random
+
+from style_transfer import models
+from style_transfer import layers
+from style_transfer import utils
 
 logger = logging.getLogger('trainer')
 

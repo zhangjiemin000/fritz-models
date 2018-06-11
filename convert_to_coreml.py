@@ -2,10 +2,10 @@ import argparse
 import keras_contrib
 import logging
 
-import layer_converters
-import layers
-import models
-from fritz_coreml_converter import FritzCoremlConverter
+from style_transfer import layer_converters
+from style_transfer import layers
+from style_transfer import models
+from style_transfer.fritz_coreml_converter import FritzCoremlConverter
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('stylize_image')

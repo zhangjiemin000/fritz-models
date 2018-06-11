@@ -2,8 +2,8 @@ import argparse
 import logging
 import os
 
-import trainer
-import models
+from style_transfer import trainer
+from style_transfer import models
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('train_network')

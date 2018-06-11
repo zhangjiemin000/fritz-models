@@ -1,7 +1,7 @@
 import keras
 import keras_contrib
 
-import layers
+from style_transfer import layers
 
 
 class StyleTransferNetwork(object):
@@ -18,32 +18,31 @@ class StyleTransferNetwork(object):
     """
 
     @classmethod
-    def build(cls, img_height, img_width):
+    def build(cls, img_height, img_width, alpha=1.0):
         """Build a Transfer Network Model using keras' functional API.
 
         Args:
             img_height - the height of the input and output image
             img_width - the width of the input and output image
+            alpha - a width parameter to scale the number of channels by
 
         Returns:
             model: a keras model object
         """
         x = keras.layers.Input(shape=(img_height, img_width, 3))
-        # Add padding to the image so that the convolutions don't shrink it
-        out = keras.layers.ZeroPadding2D(padding=(40, 40))(x)
-        out = cls._convolution(out, 32, 9, strides=1)
-        out = cls._convolution(out, 64, 3, strides=2)
-        out = cls._convolution(out, 128, 3, strides=2)
-        out = cls._residual_block(out, 128)
-        out = cls._residual_block(out, 128)
-        out = cls._residual_block(out, 128)
-        out = cls._residual_block(out, 128)
-        out = cls._residual_block(out, 128)
-        out = cls._upsample(out, 64, 3)
-        out = cls._upsample(out, 32, 3)
+        out = cls._convolution(x, int(alpha * 32), 9, strides=1)
+        out = cls._convolution(out, int(alpha * 64), 3, strides=2)
+        out = cls._convolution(out, int(alpha * 128), 3, strides=2)
+        out = cls._residual_block(out, int(alpha * 128))
+        out = cls._residual_block(out, int(alpha * 128))
+        out = cls._residual_block(out, int(alpha * 128))
+        out = cls._residual_block(out, int(alpha * 128))
+        out = cls._residual_block(out, int(alpha * 128))
+        out = cls._upsample(out, int(alpha * 64), 3)
+        out = cls._upsample(out, int(alpha * 32), 3)
         # Add a layer of padding to keep sizes consistent.
-        out = keras.layers.ZeroPadding2D(padding=(1, 1))(out)
-        out = cls._convolution(out, 3, 9, relu=False, padding='valid')
+        # out = keras.layers.ZeroPadding2D(padding=(1, 1))(out)
+        out = cls._convolution(out, 3, 9, relu=False, padding='same')
         # Restrict outputs of pixel values to -1 and 1.
         out = keras.layers.Activation('tanh')(out)
         # Deprocess the image into valid image data. Note we'll need to define
@@ -103,13 +102,13 @@ class StyleTransferNetwork(object):
         """
         # Make sure the layer has the proper size and store a copy of the
         # original, cropped input layer.
-        identity = keras.layers.Cropping2D(cropping=((2, 2), (2, 2)))(x)
+        # identity = keras.layers.Cropping2D(cropping=((2, 2), (2, 2)))(x)
 
-        out = cls._convolution(x, n_filters, kernel_size, padding='valid')
+        out = cls._convolution(x, n_filters, kernel_size, padding='same')
         out = cls._convolution(
-            out, n_filters, kernel_size, padding='valid', relu=False
+            out, n_filters, kernel_size, padding='same', relu=False
         )
-        out = keras.layers.Add()([out, identity])
+        out = keras.layers.Add()([out, x])
         return out
 
     @classmethod
@@ -125,8 +124,8 @@ class StyleTransferNetwork(object):
             out - a keras layer as output
         """
         out = keras.layers.UpSampling2D()(x)
-        out = keras.layers.ZeroPadding2D(padding=(2, 2))(out)
-        out = cls._convolution(out, n_filters, kernel_size, padding='valid')
+        # out = keras.layers.ZeroPadding2D(padding=(2, 2))(out)
+        out = cls._convolution(out, n_filters, kernel_size, padding='same')
         return out
 
 
