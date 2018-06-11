@@ -92,6 +92,10 @@ if __name__ == '__main__':
               'file and resume training from there. If no file exists, weights'
               ' are initialized randomly.')
     )
+    parser.add_argument(
+        '--alpha', type=float, default=1.0,
+        help='the width parameter controlling the number of filters'
+    )
 
     args = parser.parse_args()
 
@@ -108,7 +112,7 @@ if __name__ == '__main__':
 
     # Create the Style Transfer Network to train.
     transfer_net = models.StyleTransferNetwork.build(
-        args.img_height, args.img_width
+        args.img_height, args.img_width, alpha=args.alpha
     )
     if args.fine_tune and os.path.exists(args.weights_checkpoint):
         logger.info('Loading model weights from %s' % args.weights_checkpoint)
