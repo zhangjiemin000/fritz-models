@@ -3,11 +3,11 @@ import keras
 import logging
 import numpy
 import time
-
-import models
-import layers
-import utils
 import random
+
+from style_transfer import models
+from style_transfer import layers
+from style_transfer import utils
 
 logger = logging.getLogger('trainer')
 
@@ -234,7 +234,7 @@ Total Variantion Loss: {total_variation_loss}
             self,
             training_image_dset,
             style_image_files,
-            weights_checkpoint_file,
+            model_checkpoint_file,
             content_layers,
             style_layers,
             content_weight=1.0,
@@ -261,7 +261,7 @@ Total Variantion Loss: {total_variation_loss}
             training_image_dset - an h5 data set containing training images
             style_image_file - a list of filenames of images that style will be
                                transfered from
-            weights_checkpoint_file -  a file to write final model weights
+            model_checkpoint_file -  a file to write model checkpoints
             content_layers - a list of layers used to compute content loss
             style_layers - a list of layers used to compute style loss
             content_weight - a weight factor for content loss. Default 1.0
@@ -428,9 +428,12 @@ Total Variantion Loss: {total_variation_loss}
 
             # Save the trained weights of the transfer network model.
             if idx % checkpoint_interval == 0:
-                logger.info('Saving weights to %s' % weights_checkpoint_file)
-                self.transfer_net.save_weights(weights_checkpoint_file)
+                logger.info('Saving weights to %s' % model_checkpoint_file)
+                self.transfer_net.save(
+                    model_checkpoint_file,
+                    include_optimizer=False
+                )
         # Save one more time.
-        logger.info('Saving weights to %s' % weights_checkpoint_file)
-        self.transfer_net.save_weights(weights_checkpoint_file)
+        logger.info('Saving model to %s' % model_checkpoint_file)
+        self.transfer_net.save(model_checkpoint_file)
         return iteration_ouputs

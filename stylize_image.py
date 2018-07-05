@@ -4,8 +4,8 @@ import logging
 import numpy
 import PIL.Image
 
-import models
-import utils
+from style_transfer import models
+from style_transfer import utils
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('stylize_image')
@@ -25,8 +25,8 @@ if __name__ == '__main__':
         help='An output file for the stylized image.'
     )
     parser.add_argument(
-        '--weights-checkpoint', type=str, required=True,
-        help='Weights from a trained Style Transfer Network.'
+        '--model-checkpoint', type=str, required=True,
+        help='Checkpoint from a trained Style Transfer Network.'
     )
     parser.add_argument(
         '--img-height', default=256, type=int,
@@ -39,11 +39,11 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    logger.info('Loading model weights from %s' % args.weights_checkpoint)
+    logger.info('Loading model from %s' % args.model_checkpoint)
     transfer_net = models.StyleTransferNetwork.build(
         args.img_height, args.img_width
     )
-    transfer_net.load_weights(args.weights_checkpoint)
+    transfer_net.load_weights(args.model_checkpoint)
 
     inputs = [transfer_net.input, keras.backend.learning_phase()]
     outputs = [transfer_net.output]

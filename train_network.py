@@ -2,8 +2,8 @@ import argparse
 import logging
 import os
 
-import trainer
-import models
+from style_transfer import trainer
+from style_transfer import models
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('train_network')
@@ -33,8 +33,8 @@ if __name__ == '__main__':
         help='A comma separated list of images to take styles from.'
     )
     parser.add_argument(
-        '--weights-checkpoint', type=str, required=True,
-        help='An file to save the trained network weights to.'
+        '--model-checkpoint', type=str, required=True,
+        help='An file to save the trained network.'
     )
     parser.add_argument(
         '--img-height', default=256, type=int,
@@ -92,6 +92,10 @@ if __name__ == '__main__':
               'file and resume training from there. If no file exists, weights'
               ' are initialized randomly.')
     )
+    parser.add_argument(
+        '--alpha', type=float, default=1.0,
+        help='the width parameter controlling the number of filters'
+    )
 
     args = parser.parse_args()
 
@@ -107,18 +111,21 @@ if __name__ == '__main__':
     style_image_files = args.style_images.split(',')
 
     # Create the Style Transfer Network to train.
-    transfer_net = models.StyleTransferNetwork.build(
-        args.img_height, args.img_width
-    )
-    if args.fine_tune and os.path.exists(args.weights_checkpoint):
-        logger.info('Loading model weights from %s' % args.weights_checkpoint)
-        transfer_net.load_weights(args.weights_checkpoint)
+    if args.fine_tune and os.path.exists(args.model_checkpoint):
+        logger.info('Loading model from %s' % args.model_checkpoint)
+        transfer_net = models.StyleTransferNetwork.load_model(
+            args.model_checkpoint
+        )
+    else:
+        transfer_net = models.StyleTransferNetwork.build(
+            args.img_height, args.img_width, alpha=args.alpha
+        )
 
     model_trainer = trainer.Trainer(transfer_net)
     model_trainer.train(
         args.training_image_dset,
         style_image_files,
-        args.weights_checkpoint,
+        args.model_checkpoint,
         content_layers,
         style_layers,
         content_weight=args.content_weight,
