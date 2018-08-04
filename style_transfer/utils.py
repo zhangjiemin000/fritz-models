@@ -1,5 +1,8 @@
+import io
+
 import PIL.Image
 import numpy
+from tensorflow.python.lib.io import file_io
 
 
 def load_image(
@@ -21,7 +24,8 @@ def load_image(
     Returns:
         img - a numpy array representing the image.
     """
-    img = PIL.Image.open(filename)
+    img = file_io.read_file_to_string(filename, binary_mode=True)
+    img = PIL.Image.open(io.BytesIO(img))
     img = img.resize((width, height), resample=PIL.Image.BILINEAR)
     img = numpy.array(img)
 

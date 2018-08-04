@@ -68,6 +68,35 @@ python convert_to_coreml.py \
 --coreml-model data/starry_night.mlmodel
 ```
 
-# TODO
-* Clean up directory structure
-* Clean up Core ML converter code
+# Train on Google Cloud ML
+
+Zip up all of the local files to send up to Google Cloud
+```
+python setup.py sdist
+```
+
+# Zip up keras_contrib so it's available
+```
+pushd /Users/jltoole/fritz/third-party/keras-contrib
+python setup.py sdist
+cp dist/* ~/fritz/fritz-style-transfer/dist/
+popd
+```
+# From fritz-style-transfer/
+export STYLE_NAME=pink_blue_rhombus
+gcloud ml-engine jobs submit training `whoami`_style_transfer`date +%s` \
+    --runtime-version 1.8 \
+    --job-dir=gs://${YOUR_GCS_BUCKET} \
+    --packages dist/style_transfer-1.0.tar.gz,dist/keras_contrib-2.0.8.tar.gz \
+    --module-name style_transfer.train \
+    --region us-east1 \
+    --config configs/cloud.yml \
+    -- \
+    --training-image-dset gs://fritz-data-sandbox/mscoco/style_transfer_train2014_256x256.h5 \
+    --style-images gs://${YOUR_GCS_BUCKET}/style_images/${STYLE_NAME}.jpg \
+    --model-checkpoint gs://${YOUR_GCS_BUCKET}/train/${STYLE_NAME}.h5 \
+    --img-height 256 \
+    --img-width 256 \
+    --num-iterations 100 \
+    --batch-size 64
+```

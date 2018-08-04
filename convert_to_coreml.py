@@ -46,8 +46,8 @@ if __name__ == '__main__':
     mlmodel = fritz_converter.convert_keras(
         transfer_net,
         custom_layers=custom_layers,
-        image_input_names=['input1'],
-        image_output_names=['output1'],
+        image_input_names=['image'],
+        image_output_names=['stylizedImage'],
         deprocessing_args={
             'is_bgr': False,
             'image_scale': 127.5,
