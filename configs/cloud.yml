@@ -1,0 +1,11 @@
+trainingInput:
+  runtimeVersion: "1.8"
+  scaleTier: CUSTOM
+  masterType: standard
+  workerCount: 1
+  workerType: standard
+  parameterServerCount: 1
+  parameterServerType: standard
+
+
+
