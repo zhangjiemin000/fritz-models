@@ -361,7 +361,7 @@ def train(
         image_size=(256, 256),
         alpha=1.0,
         batch_size=4,
-        num_epochs=1,
+        num_iterations=1,
         norm_by_channels=False,
         learning_rate=0.001,
         log_interval=10,
@@ -390,7 +390,7 @@ def train(
         img_height - the height of the input images. Default 256
         img_width - the width of the input images. Default 256
         batch_size - the batch size of inputs each iteration. Default 4
-        num_epochs - the number of epochs
+        num_iterations - the number of iterations
         norm_by_channels - bool to normalize Gram Matrices by the
                            number of channels. Default True
         learning_rate - the learning rate. Default 0.001
@@ -408,7 +408,7 @@ def train(
         style_image_files,
         image_size,
         batch_size,
-        num_epochs
+        num_iterations
     )
 
     transfer_net, variable_net, style_net, content_net = _create_networks(
@@ -449,7 +449,7 @@ def train(
     sess.run(init_op)
 
     start_time = time.time()
-    for step in range(10):
+    for step in range(num_iterations):
         # perform the operations we defined earlier on batch
         total_loss_value, style_loss_value, content_loss_value, total_variation_loss_value, step_value = sess.run(
             [train_op, style_loss, content_loss, total_variation_loss, global_step],

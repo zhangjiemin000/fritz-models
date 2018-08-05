@@ -122,7 +122,7 @@ if __name__ == '__main__':
         image_size=image_size,
         alpha=args.alpha,
         batch_size=args.batch_size,
-        num_epochs=args.num_iterations,
+        num_iterations=args.num_iterations,
         learning_rate=args.learning_rate,
         log_interval=args.log_interval,
         checkpoint_interval=args.checkpoint_interval,
