@@ -273,7 +273,7 @@ def _create_networks(
         prev_layer=vgg_in,
         input_tensor=transfer_net.input
     )
-    return transfer_net, variable_net, style_net, content_net
+    return transfer_net, variable_net, style_net, content_net, style_in
 
 
 def _get_losses(
@@ -331,21 +331,13 @@ def _get_losses(
 
 def _create_optimizer(transfer_net, total_loss, learning_rate):
     # Setup the optimizer
-    optimizer = keras.backend.tf.train.AdamOptimizer(learning_rate)
+    params = transfer_net.trainable_weights
+    constraints = {}  # There are none
 
-    # Barrier to compute gradients after updating moving avg of batch norm
-    with keras.backend.tf.control_dependencies(transfer_net.updates):
-        barrier = keras.backend.tf.no_op(name="update_barrier")
-
-    with keras.backend.tf.control_dependencies([barrier]):
-        grads = optimizer.compute_gradients(
-            total_loss,
-            transfer_net.trainable_weights)
-        grad_updates = optimizer.apply_gradients(grads)
-
-    with keras.backend.tf.control_dependencies([grad_updates]):
-        train_op = keras.backend.tf.identity(total_loss, name="train")
-    return train_op
+    # Create an optimizer and updates
+    optimizer = keras.optimizers.Adam(lr=learning_rate)
+    updates = optimizer.get_updates(params, constraints, total_loss)
+    return updates
 
 
 def train(
@@ -398,9 +390,6 @@ def train(
         checkpoint_interval - the interval at which to save model
                               checkpoints. Default 10
     """
-    keras.backend.set_learning_phase(1)
-    keras.backend.manual_variable_initialization(True)
-
     # Get all of the images from the input dataset
     dataset_iterator, style_imgs = _get_inputs(
         tfrecord_filename,
@@ -410,7 +399,7 @@ def train(
         num_iterations
     )
 
-    transfer_net, variable_net, style_net, content_net = _create_networks(
+    transfer_net, variable_net, style_net, content_net, style_in = _create_networks(
         image_size,
         alpha=alpha,
         input_tensor=dataset_iterator.get_next(),
@@ -435,38 +424,44 @@ def train(
         norm_by_channels=norm_by_channels
     )
 
-    train_op = _create_optimizer(transfer_net, total_loss, learning_rate)
+    updates = _create_optimizer(transfer_net, total_loss, learning_rate)
 
-    global_step = keras.backend.tf.get_variable(
-        'global_step',
-        [],
-        initializer=keras.backend.tf.constant_initializer(0),
-        trainable=False)
-    increment_global_step_op = keras.backend.tf.assign(global_step, global_step + 1)
+    # Define the training function. This takes images into the
+    # transfer network as well as style images.
+    # Technically the learning phase here is unneeded so long as we are
+    # doing InstanceNormalization and not BatchNormalization. In the latter
+    # case, be careful at which values you pass when evaluating the model.
+    inputs = [
+        style_in,
+        keras.backend.learning_phase()
+    ]
 
-    init_op = keras.backend.tf.global_variables_initializer()
-    sess = keras.backend.get_session()
-    sess.run(init_op)
+    # Output all of the losses.
+    outputs = [
+        total_loss,
+        content_loss,
+        style_loss,
+        total_variation_loss,
+    ]
+
+    func_train = keras.backend.function(inputs, outputs, updates)
 
     start_time = time.time()
     for step in range(num_iterations):
         # perform the operations we defined earlier on batch
-        total_loss_value, style_loss_value, content_loss_value, total_variation_loss_value, step_value = sess.run(
-            [train_op, style_loss, content_loss, total_variation_loss, increment_global_step_op],
-            feed_dict={style_net.model.input: style_imgs}
-        )
+
+        out = func_train([style_imgs, 1.])
 
         if step % log_interval == 0:
-            print(transfer_net.layers[1].get_weights())
             elapsed_time = time.time() - start_time
             start_time = time.time()
             log_msg = _log_statement.format(
                 step=step,
-                global_step=step_value,
-                avg_total_loss=numpy.mean(total_loss_value),
-                avg_style_loss=numpy.mean(style_loss_value),
-                avg_content_loss=numpy.mean(content_loss_value),
-                avg_total_variation_loss=numpy.mean(total_variation_loss_value),
+                global_step=0,
+                avg_total_loss=numpy.mean(out[0]),
+                avg_style_loss=numpy.mean(out[1]),
+                avg_content_loss=numpy.mean(out[2]),
+                avg_total_variation_loss=numpy.mean(out[3]),
                 duration=elapsed_time)
             logging.info(log_msg)
             # Save one more time.
