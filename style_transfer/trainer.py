@@ -459,8 +459,8 @@ def train(
                 step=step,
                 global_step=0,
                 avg_total_loss=numpy.mean(out[0]),
-                avg_style_loss=numpy.mean(out[1]),
-                avg_content_loss=numpy.mean(out[2]),
+                avg_content_loss=numpy.mean(out[1]),
+                avg_style_loss=numpy.mean(out[2]),
                 avg_total_variation_loss=numpy.mean(out[3]),
                 duration=elapsed_time)
             logging.info(log_msg)
