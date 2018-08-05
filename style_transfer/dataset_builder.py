@@ -23,7 +23,9 @@ class DatasetBuilder(object):
             )
         }
         parsed_features = tf.parse_single_example(example_proto, features)
-        image = tf.image.decode_jpeg(parsed_features["image/encoded"])
+        image = tf.image.decode_jpeg(
+            parsed_features["image/encoded"],
+            channels=3)
         return image
 
     @classmethod
