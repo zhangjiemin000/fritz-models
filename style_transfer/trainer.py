@@ -468,6 +468,9 @@ def train(
                 avg_total_variation_loss=numpy.mean(total_variation_loss_value),
                 duration=elapsed_time)
             logging.info(log_msg)
+            # Save one more time.
+            logger.info('Saving model to %s' % model_checkpoint_file)
+            transfer_net.save(model_checkpoint_file)
 
     # Save one more time.
     logger.info('Saving model to %s' % model_checkpoint_file)
