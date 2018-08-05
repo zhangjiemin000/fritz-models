@@ -457,6 +457,7 @@ def train(
         )
 
         if step % log_interval == 0:
+            print(transfer_net.layers[1].get_weights())
             elapsed_time = time.time() - start_time
             start_time = time.time()
             log_msg = _log_statement.format(
