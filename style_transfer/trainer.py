@@ -442,6 +442,7 @@ def train(
         [],
         initializer=keras.backend.tf.constant_initializer(0),
         trainable=False)
+    increment_global_step_op = keras.backend.tf.assign(global_step, global_step + 1)
 
     init_op = keras.backend.tf.global_variables_initializer()
     sess = keras.backend.get_session()
@@ -451,7 +452,7 @@ def train(
     for step in range(num_iterations):
         # perform the operations we defined earlier on batch
         total_loss_value, style_loss_value, content_loss_value, total_variation_loss_value, step_value = sess.run(
-            [train_op, style_loss, content_loss, total_variation_loss, global_step],
+            [train_op, style_loss, content_loss, total_variation_loss, increment_global_step_op],
             feed_dict={style_net.model.input: style_imgs}
         )
 
