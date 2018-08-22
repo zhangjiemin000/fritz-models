@@ -1,8 +1,10 @@
 import logging
 import time
+import os
 
 import keras
 import numpy
+from tensorflow.python.lib.io import file_io
 
 from style_transfer import models
 from style_transfer import layers
@@ -340,6 +342,13 @@ def _create_optimizer(transfer_net, total_loss, learning_rate):
     return updates
 
 
+def copy_file_to_gcs(job_dir, file_path):
+    with file_io.FileIO(file_path, mode='rb') as input_f:
+        with file_io.FileIO(
+                os.path.join(job_dir, file_path), mode='w+') as output_f:
+            output_f.write(input_f.read())
+
+
 def train(
         tfrecord_filename,
         style_image_files,
@@ -357,7 +366,8 @@ def train(
         learning_rate=0.001,
         log_interval=10,
         checkpoint_interval=10,
-        fine_tune_checkpoint=None):
+        fine_tune_checkpoint=None,
+        gcs_bucket=None):
     """Train the Transfer Network.
 
     The training procedure consists of iterating over images in
@@ -467,7 +477,11 @@ def train(
             # Save one more time.
             logger.info('Saving model to %s' % model_checkpoint_file)
             transfer_net.save(model_checkpoint_file)
+            if gcs_bucket:
+                copy_file_to_gcs(gcs_bucket, model_checkpoint_file)
 
     # Save one more time.
     logger.info('Saving model to %s' % model_checkpoint_file)
     transfer_net.save(model_checkpoint_file)
+    if gcs_bucket:
+        copy_file_to_gcs(gcs_bucket, model_checkpoint_file)

@@ -2,6 +2,7 @@ import keras
 import keras_contrib
 
 from style_transfer import layers
+from style_transfer import utils
 
 
 class StyleTransferNetwork(object):
@@ -54,7 +55,11 @@ class StyleTransferNetwork(object):
         # a custom layer for this in Core ML as well.
         out = layers.DeprocessStylizedImage()(out)
         model = keras.models.Model(inputs=x, outputs=out)
+
+        # Optionally load weights from a checkpoint
         if checkpoint_file:
+            if checkpoint_file.startswith('gs://'):
+                checkpoint_file = utils.copy_file_from_gcs(checkpoint_file)
             model.load_weights(checkpoint_file, by_name=True)
         return model
 

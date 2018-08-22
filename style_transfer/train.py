@@ -1,9 +1,7 @@
 import argparse
 import logging
-import os
 
 from style_transfer import trainer
-from style_transfer import models
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('train_network')
@@ -94,6 +92,10 @@ if __name__ == '__main__':
         '--norm-by-channels', action='store_true',
         help='if present, normalize gram matrix by channel'
     )
+    parser.add_argument(
+        '--gcs-bucket', type=str,
+        help='a gcs bucket to save results to.'
+    )
 
     args, unknown = parser.parse_known_args()
 
@@ -127,6 +129,7 @@ if __name__ == '__main__':
         log_interval=args.log_interval,
         checkpoint_interval=args.checkpoint_interval,
         fine_tune_checkpoint=args.fine_tune_checkpoint,
-        norm_by_channels=norm_by_channels
+        norm_by_channels=norm_by_channels,
+        gcs_bucket=args.gcs_bucket
     )
     logger.info('Done.')
