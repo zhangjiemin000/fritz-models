@@ -1,7 +1,11 @@
 import keras
 import keras_contrib
+import logging
 
 from style_transfer import layers
+from style_transfer import utils
+
+logger = logging.getLogger('models')
 
 
 class StyleTransferNetwork(object):
@@ -18,18 +22,23 @@ class StyleTransferNetwork(object):
     """
 
     @classmethod
-    def build(cls, img_height, img_width, alpha=1.0):
+    def build(
+            cls,
+            image_size,
+            alpha=1.0,
+            input_tensor=None,
+            checkpoint_file=None):
         """Build a Transfer Network Model using keras' functional API.
 
         Args:
-            img_height - the height of the input and output image
-            img_width - the width of the input and output image
+            image_size - the size of the input and output image (H, W)
             alpha - a width parameter to scale the number of channels by
 
         Returns:
             model: a keras model object
         """
-        x = keras.layers.Input(shape=(img_height, img_width, 3))
+        x = keras.layers.Input(
+            shape=(image_size[0], image_size[1], 3), tensor=input_tensor)
         out = cls._convolution(x, int(alpha * 32), 9, strides=1)
         out = cls._convolution(out, int(alpha * 64), 3, strides=2)
         out = cls._convolution(out, int(alpha * 128), 3, strides=2)
@@ -48,28 +57,22 @@ class StyleTransferNetwork(object):
         # Deprocess the image into valid image data. Note we'll need to define
         # a custom layer for this in Core ML as well.
         out = layers.DeprocessStylizedImage()(out)
-        return keras.models.Model(inputs=x, outputs=out)
+        model = keras.models.Model(inputs=x, outputs=out)
 
-    @classmethod
-    def load_model(cls, filename):
-        """Load model from a saved model checkpoint.
-
-        Args:
-            filename - the height of the input and output image
-        Returns:
-            model - a keras model
-        """
-        custom_objects = {
-            'InstanceNormalization':
-                keras_contrib.layers.normalization.InstanceNormalization,
-            'DeprocessStylizedImage': layers.DeprocessStylizedImage
-        }
-        return keras.models.load_model(filename, custom_objects=custom_objects)
+        # Optionally load weights from a checkpoint
+        if checkpoint_file:
+            logger.info(
+                'Loading weights from checkpoint: %s' % checkpoint_file
+            )
+            if checkpoint_file.startswith('gs://'):
+                checkpoint_file = utils.copy_file_from_gcs(checkpoint_file)
+            model.load_weights(checkpoint_file, by_name=True)
+        return model
 
     @classmethod
     def _convolution(
             cls, x, n_filters, kernel_size, strides=1,
-            padding='same', relu=True):
+            padding='same', relu=True, use_bias=False):
         """Create a convolution block.
 
         This block consists of a convolution layer, normalization, and an
@@ -86,12 +89,14 @@ class StyleTransferNetwork(object):
             padding: one of "valid" or "same" (case-insensitive).
             relu - a bool specifying whether or not a RELU activation is
                    applied. Default True.
+            use_bias = a bool specifying whether or not to use a bias term
         """
         out = keras.layers.convolutional.Conv2D(
             n_filters,
             kernel_size,
             strides=strides,
             padding=padding,
+            use_bias=use_bias
         )(x)
 
         # We are using the keras-contrib library from @farizrahman4u for
