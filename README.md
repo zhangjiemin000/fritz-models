@@ -126,9 +126,9 @@ gsutil mb gs://${YOUR_GCS_BUCKET}
 
 Copy training data to GCS, pre-trained checkpoints, and style image to:
 ```
-gsutil cp path/to/training_images.tfrecord gs://${YOUR_GCS_BUCKET}/data
-gsutil cp path/to/${STYLE_NAME}.jpg gs://${YOUR_GCS_BUCKET}/data/style_images/
-gsutil cp exmaple/starry_night_256x256_025 gs://${YOUR_GCS_BUCKET}/data/
+gsutil cp example/training_images.tfrecord gs://${YOUR_GCS_BUCKET}/data
+gsutil cp example/${STYLE_NAME}.jpg gs://${YOUR_GCS_BUCKET}/data/style_images/
+gsutil cp example/starry_night_256x256_025.h5 gs://${YOUR_GCS_BUCKET}/data/
 ```
 
 ## Package up libraries.
@@ -159,7 +159,7 @@ gcloud ml-engine jobs submit training `whoami`_style_transfer`date +%s` \
     --region us-east1 \
     --scale-tier basic_gpu \
     -- \
-    --training-image-dset gs://${YOUR_GCS_BUCKET}/data/training_images.tfrecord \
+    --training-image-dset gs://${YOUR_GCS_BUCKET}/data/test_training_images.tfrecord \
     --style-images gs://${YOUR_GCS_BUCKET}/data/style_images/${STYLE_NAME}.jpg \
     --model-checkpoint ${STYLE_NAME}_256x256_025.h5 \
     --image-size 256,256 \
