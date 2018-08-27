@@ -1,6 +1,9 @@
 # fritz-style-transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
+<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/dog.jpg" width="256" height="256">
+<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/stylized_dog.jpg" width="256" height="256">
+
 # Installation
 
 If you're not installing using a package manager like `pip`, make sure the root directory is on your `PYTHONPATH`:
