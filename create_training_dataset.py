@@ -46,7 +46,6 @@ class DatasetCreator(object):
             cls,
             input_dir,
             output_filename,
-            image_size,
             num_images=None,
             num_threads=1):
         """Process all images in a directory and create an H5 data set.
@@ -54,11 +53,9 @@ class DatasetCreator(object):
         Args:
             input_dir - a directory containing images
             output_filename - the name of the h5 file to write to
-            image_size - a tuple (height, width) to resize images to
             num_images - the number of images to process. 'None' processes all
             num_threads - the number of threads to use. Default 1.
         """
-        img_height, img_width = image_size
         img_list = cls._get_image_filenames(input_dir, num_images)
         num_images = len(img_list)
         # Remove the h5 file if it exists
@@ -70,7 +67,6 @@ class DatasetCreator(object):
         record_writer = tf.python_io.TFRecordWriter(output_filename)
         for idx, filename in enumerate(img_list):
             img = PIL.Image.open(filename)
-            img = img.resize(image_size, resample=PIL.Image.BILINEAR)
             encoded_jpeg = io.BytesIO()
             img.save(encoded_jpeg, format='jpeg')
             encoded_jpeg.seek(0)
@@ -159,7 +155,5 @@ if __name__ == '__main__':
     DatasetCreator.process_images(
         image_directory,
         args.output,
-        image_size=(args.img_height, args.img_width),
-        num_images=args.num_images,
-        num_threads=args.threads
+        num_images=args.num_images
     )

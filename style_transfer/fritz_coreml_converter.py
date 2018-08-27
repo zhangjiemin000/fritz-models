@@ -42,6 +42,7 @@ class FritzCoremlConverter(object):
                 cls._check_unsupported_layers(layer)
             else:
                 if type(layer) not in supported_layers:
+                    print(supported_layers)
                     raise ValueError(
                         "Keras layer '%s' not supported. " % str(type(layer))
                     )

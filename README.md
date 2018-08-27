@@ -1,6 +1,14 @@
 # fritz-style-transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
+# Installation
+
+If you're not installing using a package manager like `pip`, make sure the root directory is on your `PYTHONPATH`:
+
+```
+export PYTHONPATH=$PYTHONPATH:`pwd`
+```
+
 # Preprocessing Training Data
 The training data comes from the [COCO Training data set](http://cocodataset.org/). It consists of ~80,000 images and labels, although the labels arent used here.
 
@@ -8,25 +16,24 @@ the `create_training_dataset.py` script will download and unzip this data then p
 
 ```
 python create_training_dataset.py \
---output data/training_images.tfrecord \
---coco-image-dir data/ \
---img-height 256 \
---img-width 256 \
---threads 1 \
+--output example/training_images.tfrecord \
+--coco-image-dir path/to/coco/ \
 --num-images 10
 ```
 
-Note that if you have already downloaded and extracted a set of images to use for training, that directory needs to be called `train2014/` and you need to point `--coco-image-dir` to the parent directory that contains that folder.
+Note that if you have already downloaded and extracted a set of images to use for training, that directory needs to be called `train2014/` and you need to point `--coco-image-dir` to the parent directory that contains that folder. Otherwise you can use the `--download` flag.
 
 # Training a Style Transfer Model
+
 To train the model from scratch for 100 iterations:
 
 ```
-python train_network.py \
---training-image-dset data/training_images.tfrecord \
---style-images data/starry-night.jpg \
---model-checkpoint data/starry_night_keras.h5 \
+python style_transfer/train.py \
+--training-image-dset example/training_images.tfrecord \
+--style-images example/starry_night.jpg \
+--model-checkpoint example/starry_night.h5 \
 --image-size 256,256 \
+--alpha 0.25 \
 --log-interval 1 \
 --num-iterations 10
 ```
@@ -34,25 +41,34 @@ python train_network.py \
 If everything looks good, we can pick up where we left off and keep training the same model.
 
 ```
-python train_network.py \
---training-image-dset data/training_images.tfrecord \
---style-images data/starry-night.jpg \
---model-checkpoint data/starry_night_keras.h5 \
+python style_transfer/train.py \
+--training-image-dset example/training_images.tfrecord \
+--style-images example/starry_night.jpg \
+--model-checkpoint example/starry_night.h5 \
 --image-size 256,256 \
---num-iterations 100 \
---fine-tune-checkpoint data/starry_night_keras.h5
+--alpha 0.25 \
+--num-iterations 1000 \
+--fine-tune-checkpoint example/starry_night.h5
 ```
 
+If you're using the full COCO dataset, you'll need around 20,000 iterations to train a model from scratch with a batch size of 24. If you're starting from a pre-trained model checkpoint, 5,000 steps should work. A model pre-trained on Starry Night is provided in the `example/` folder.
+
+For styles that are abstract with strong geometric patters, try higher values for `--content-weight` like `3` or `10`. For styles that are more photo-realistic images with smaller details, boost the `--style-weight` to `0.001` or more.
+
+Finally, note that for training, we resize images to be 256x256px. This is for training only. Final models can be set to take images of any size.
+
+## Training models for mobile
+
+By default, the style transfer networks produced here are roughly 7mb in size and contain 7 million parameters. They can create a stylized image in ~500ms on high end mobile phones, and 5s on lower end phones. To make the model's faster, we've included a width-multiplier parameter similar to the one introduced by Google in their MobileNet architecture. The value `alpha` can be set between 0 and 1 and will control how many filters are included in each layer. Lower `alpha` means fewer filters, fewer parameters, faster models, with slightly worse style transfer abilities. In testing, `alpha=0.25` produced models that ran at 17fps on an iPhone X, while still transfering styles well.
 # Stylizing Images
 To stylize an image with a trained model you can run:
 
 ```
 python stylize_image.py \
---input-image data/test.jpg \
---output-image data/stylized_test.jpg \
---model-checkpoint data/starry_night_keras.h5
+--input-image example/dog.jpg \
+--output-image example/stylized_dog.jpg \
+--model-checkpoint example/starry_night_256x256_025.h5
 ```
-
 
 # Convert to Core ML
 Use the converter script to convert to Core ML.
@@ -62,28 +78,79 @@ the user to define custom conversions between Keras layers and core ml layers. T
 
 ```
 python convert_to_coreml.py \
---keras-checkpoint data/starry_night_keras.h5 \
---coreml-model data/starry_night.mlmodel
+--keras-checkpoint example/starry_night_256x256_025.h5 \
+--alpha 0.25 \
+--image-size 640,480 \
+--coreml-model example/starry_night_640x480_025.mlmodel
 ```
 
 # Train on Google Cloud ML
 
-Zip up all of the local files to send up to Google Cloud
+This library is designed to work with certain configurations on Google Cloud ML so you can train styles in parallel and take advantage GPUs. Assuming you have Google Cloud ML and Google Cloud Storage set up, the following commands will get you training new models in just a few hours.
+
+## Set up your Google Cloud Storage bucket.
+
+This repo assumes the structure on Google Cloud is 
+
+```
+gs://${YOUR_GCS_BUCKET}/
+    |-- data/
+        |-- training_images.tfrecord
+        |-- starry_night_256x256_025.h5
+        |-- style_images/
+            |-- style_1.jpg
+            |-- style_2.jpg
+    |-- dist/
+        |-- fritz_style_transfer.zip
+    |-- train/
+        |-- pretrained_model.h5
+        |-- output_model.h5
+```
+
+To make things easier, start by setting some environmental variables.
+
+```
+export YOUR_GCS_BUCKET=your_gcs_bucket
+export FRITZ_STYLE_TRANSFER_PATH=/path/to/fritz-style-transfer
+export KERAS_CONTRIB_PATH=/path/to/keras-contrib
+export STYLE_NAME=style_name
+```
+
+Note that `STYLE_NAME` should be the filename of the style image (without the extension).
+
+Create the GCS bucket if you haven't already:
+
+```
+gsutil mb gs://${YOUR_GCS_BUCKET}
+```
+
+Copy training data to GCS, pre-trained checkpoints, and style image to:
+```
+gsutil cp path/to/training_images.tfrecord gs://${YOUR_GCS_BUCKET}/data
+gsutil cp path/to/${STYLE_NAME}.jpg gs://${YOUR_GCS_BUCKET}/data/style_images/
+gsutil cp exmaple/starry_night_256x256_025 gs://${YOUR_GCS_BUCKET}/data/
+```
+
+## Package up libraries.
+
+Zip up all of the local files to send up to Google Cloud.
 ```
 python setup.py sdist
 ```
 
-# Zip up keras_contrib so it's available
+Zip up keras_contrib so it's available to the library as well.
 ```
-pushd path/to/keras-contrib
+pushd ${KERAS_CONTRIB_PATH}
 python setup.py sdist
-cp dist/* ~/fritz/fritz-style-transfer/dist/
+cp dist/* ${FRITZ_STYLE_TRANSFER_PATH}/dist/
 popd
 ```
 
+## Start the training job
+
+The following command will start training a new style transfer models from a pre-trained checkpoint. This configuration trains on 256x256 images and has `--alpha=0.25` making it suitable for real-time use in mobile apps.
+
 ```
-# from `fritz-style-transfer/`
-export STYLE_NAME=name_of_style
 gcloud ml-engine jobs submit training `whoami`_style_transfer`date +%s` \
     --runtime-version 1.8 \
     --job-dir=gs://${YOUR_GCS_BUCKET} \
@@ -92,15 +159,17 @@ gcloud ml-engine jobs submit training `whoami`_style_transfer`date +%s` \
     --region us-east1 \
     --scale-tier basic_gpu \
     -- \
-    --training-image-dset gs://fritz-data-sandbox/mscoco/tfrecord/coco_train.record \
-    --style-images gs://${YOUR_GCS_BUCKET}/style_images/${STYLE_NAME}.jpg \
+    --training-image-dset gs://${YOUR_GCS_BUCKET}/data/training_images.tfrecord \
+    --style-images gs://${YOUR_GCS_BUCKET}/data/style_images/${STYLE_NAME}.jpg \
     --model-checkpoint ${STYLE_NAME}_256x256_025.h5 \
     --image-size 256,256 \
     --alpha 0.25 \
     --num-iterations 5000 \
     --batch-size 24 \
     --content-weight 1 \
-    --style-weight .001 \
+    --style-weight .0001 \
     --gcs-bucket gs://${YOUR_GCS_BUCKET}/train \
-    --fine-tune-checkpoint gs://${YOUR_GCS_BUCKET}/train/starry_night_256x256_025.h5
+    --fine-tune-checkpoint gs://${YOUR_GCS_BUCKET}/data/starry_night_256x256_025.h5
 ```
+
+Distributed training and TPUs are not yet supported.

@@ -1,8 +1,11 @@
 import keras
 import keras_contrib
+import logging
 
 from style_transfer import layers
 from style_transfer import utils
+
+logger = logging.getLogger('models')
 
 
 class StyleTransferNetwork(object):
@@ -58,6 +61,9 @@ class StyleTransferNetwork(object):
 
         # Optionally load weights from a checkpoint
         if checkpoint_file:
+            logger.info(
+                'Loading weights from checkpoint: %s' % checkpoint_file
+            )
             if checkpoint_file.startswith('gs://'):
                 checkpoint_file = utils.copy_file_from_gcs(checkpoint_file)
             model.load_weights(checkpoint_file, by_name=True)

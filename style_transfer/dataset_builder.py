@@ -6,6 +6,7 @@ logger = logging.getLogger('trainer')
 
 
 class DatasetBuilder(object):
+    """Build a TFRecord dataset for training."""
 
     @staticmethod
     def _resize_fn(images, image_size):
@@ -29,13 +30,21 @@ class DatasetBuilder(object):
         return image
 
     @classmethod
-    def build(cls, filename, batch_size, image_size, num_epocs=None):
+    def build(cls, filename, batch_size, image_size):
+        """Build a TensorFlow dataset from images.
+
+        Args:
+            filename (str) - a filename of tfrecords to load
+            batch_size (int) - the batch size for the iterator
+            image_size ((int, int)) - resize all images to a single size
+
+        Returns
+            dataset - a tfrecord dataset
+        """
         logger.info('Creating dataset from: %s' % filename)
         dataset = tf.data.TFRecordDataset(filename)
         dataset = dataset.map(cls._decode_example)
         dataset = dataset.map(lambda x: cls._resize_fn(x, image_size))
-        dataset = dataset.repeat(num_epocs)
         dataset = dataset.batch(batch_size)
-
-        iterator = dataset.make_one_shot_iterator()
-        return iterator
+        dataset = dataset.repeat()  # Repeat forever
+        return dataset

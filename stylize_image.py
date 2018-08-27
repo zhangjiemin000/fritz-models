@@ -4,7 +4,9 @@ import logging
 import numpy
 import PIL.Image
 
-from style_transfer import models
+import keras_contrib
+
+from style_transfer import layers
 from style_transfer import utils
 
 logging.basicConfig(level=logging.INFO)
@@ -28,22 +30,21 @@ if __name__ == '__main__':
         '--model-checkpoint', type=str, required=True,
         help='Checkpoint from a trained Style Transfer Network.'
     )
-    parser.add_argument(
-        '--img-height', default=256, type=int,
-        help='The height of training images.'
-    )
-    parser.add_argument(
-        '--img-width', default=256, type=int,
-        help='The width of training images.'
-    )
 
     args = parser.parse_args()
 
     logger.info('Loading model from %s' % args.model_checkpoint)
-    transfer_net = models.StyleTransferNetwork.build(
-        args.img_height, args.img_width
+    custom_objects = {
+        'InstanceNormalization':
+            keras_contrib.layers.normalization.InstanceNormalization,
+        'DeprocessStylizedImage': layers.DeprocessStylizedImage
+    }
+    transfer_net = keras.models.load_model(
+        args.model_checkpoint,
+        custom_objects=custom_objects
     )
-    transfer_net.load_weights(args.model_checkpoint)
+
+    image_size = transfer_net.input_shape[1:3]
 
     inputs = [transfer_net.input, keras.backend.learning_phase()]
     outputs = [transfer_net.output]
@@ -52,8 +53,8 @@ if __name__ == '__main__':
 
     input_image = utils.load_image(
         args.input_image,
-        args.img_height,
-        args.img_width,
+        image_size[0],
+        image_size[1],
         expand_dims=True
     )
     output_image = transfer_style([input_image, 1])[0]

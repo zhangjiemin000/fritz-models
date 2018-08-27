@@ -1,10 +1,10 @@
 import argparse
 import keras_contrib
 import logging
-import keras
 
 from style_transfer import layer_converters
 from style_transfer import layers
+from style_transfer import models
 from style_transfer.fritz_coreml_converter import FritzCoremlConverter
 
 logging.basicConfig(level=logging.INFO)
@@ -20,12 +20,21 @@ if __name__ == '__main__':
         help='Weights from a trained Style Transfer Network.'
     )
     parser.add_argument(
+        '--alpha', type=float, required=True,
+        help='The width multiplier of the network.'
+    )
+    parser.add_argument(
         '--coreml-model', type=str, required=True,
         help='A CoreML output file to save to'
+    )
+    parser.add_argument(
+        '--image-size', type=str, default='640,480',
+        help='The size of input and output of the final Core ML model: H,W'
     )
 
     args = parser.parse_args()
 
+    image_size = [int(dim) for dim in args.image_size.split(',')]
     # Map custom layers to their custom coreml converters
     custom_layers = {
         keras_contrib.layers.normalization.InstanceNormalization: layer_converters.convert_instancenormalization,  # NOQA
@@ -39,22 +48,17 @@ if __name__ == '__main__':
 
     logger.info('Loading model weights from %s' % args.keras_checkpoint)
 
-    transfer_net = keras.models.load_model(
-        args.keras_checkpoint,
-        custom_objects=custom_objects)
+    model = models.StyleTransferNetwork.build(
+        image_size, alpha=args.alpha, checkpoint_file=args.keras_checkpoint)
+
     fritz_converter = FritzCoremlConverter()
     mlmodel = fritz_converter.convert_keras(
-        transfer_net,
-        custom_layers=custom_layers,
+        model,
+        input_names=['image'],
         image_input_names=['image'],
+        output_names=['stylizedImage'],
         image_output_names=['stylizedImage'],
-        deprocessing_args={
-            'is_bgr': False,
-            'image_scale': 127.5,
-            'red_bias': 127.5,
-            'green_bias': 127.5,
-            'blue_bias': 127.5
-        }
+        custom_layers=custom_layers
     )
     logger.info('Saving .mlmodel to %s' % args.coreml_model)
     mlmodel.save(args.coreml_model)

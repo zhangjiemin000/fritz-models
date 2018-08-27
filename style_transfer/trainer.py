@@ -16,7 +16,6 @@ logger = logging.getLogger('trainer')
 
 _log_statement = '''
 Training Update:
-    Global Step: {global_step}
     Step: {step}
     Avg. Total Loss: {avg_total_loss}
     Avg. Style Loss: {avg_style_loss}
@@ -223,15 +222,14 @@ def _get_inputs(
         tfrecord_filename,
         style_image_files,
         image_size,
-        batch_size,
-        num_epochs):
+        batch_size):
     # Get all of the images from the input dataset
-    dataset_iterator = dataset_builder.DatasetBuilder.build(
+    dataset = dataset_builder.DatasetBuilder.build(
         tfrecord_filename,
         batch_size,
-        image_size,
-        num_epocs=num_epochs
+        image_size
     )
+    dataset_iterator = dataset.make_one_shot_iterator()
 
     # Load the style images.
     logger.info('Loading style images:\n%s' % '\n'.join(style_image_files))
@@ -405,11 +403,10 @@ def train(
         tfrecord_filename,
         style_image_files,
         image_size,
-        batch_size,
-        num_iterations
+        batch_size
     )
 
-    transfer_net, variable_net, style_net, content_net, style_in = _create_networks(
+    transfer_net, variable_net, style_net, content_net, style_in = _create_networks(  # NOQA
         image_size,
         alpha=alpha,
         input_tensor=dataset_iterator.get_next(),
@@ -467,7 +464,6 @@ def train(
             start_time = time.time()
             log_msg = _log_statement.format(
                 step=step,
-                global_step=0,
                 avg_total_loss=numpy.mean(out[0]),
                 avg_content_loss=numpy.mean(out[1]),
                 avg_style_loss=numpy.mean(out[2]),
