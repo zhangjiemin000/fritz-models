@@ -1,6 +1,10 @@
 # fritz-style-transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
+# Add style transfer to your app in minutes with Fritz
+
+If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
+
 # Installation
 
 If you're not installing using a package manager like `pip`, make sure the root directory is on your `PYTHONPATH`:
@@ -60,6 +64,9 @@ Finally, note that for training, we resize images to be 256x256px. This is for t
 ## Training models for mobile
 
 By default, the style transfer networks produced here are roughly 7mb in size and contain 7 million parameters. They can create a stylized image in ~500ms on high end mobile phones, and 5s on lower end phones. To make the model's faster, we've included a width-multiplier parameter similar to the one introduced by Google in their MobileNet architecture. The value `alpha` can be set between 0 and 1 and will control how many filters are included in each layer. Lower `alpha` means fewer filters, fewer parameters, faster models, with slightly worse style transfer abilities. In testing, `alpha=0.25` produced models that ran at 17fps on an iPhone X, while still transfering styles well.
+
+Finally, for models that are intended to be used in real-time on a CPU only, you can use the `--use-small-network` flag to train a model architecture that has been heavily pruned. The style transfer itself isn't quite as good, but the results are usable and the models are incredible small.
+
 # Stylizing Images
 To stylize an image with a trained model you can run:
 
@@ -70,7 +77,10 @@ python stylize_image.py \
 --model-checkpoint example/starry_night_256x256_025.h5
 ```
 
-# Convert to Core ML
+# Convert to Mobile
+Style transfer models can be converted to both Core ML and TensorFlow Mobile formats.
+
+## Convert to Core ML
 Use the converter script to convert to Core ML.
 
 This converter is a slight modification of Apple's keras converter that allows
@@ -83,6 +93,19 @@ python convert_to_coreml.py \
 --image-size 640,480 \
 --coreml-model example/starry_night_640x480_025.mlmodel
 ```
+
+## Convert to TensorFlow Mobile
+Models cannot be converted to TFLite because some operations are not supported, but TensorFlow Mobile works fine. To convert your model to an optimized frozen graph, run:
+
+```
+python convert_to_tfmobile.py \
+--keras-checkpoint example/starry_night_256x256_025.h5 \
+--alpha 0.25 \
+--image-size 640,480 \
+--output-dir example/
+```
+
+This produces a number of TensorFlow graph formats. The `*_optimized.pb` graph file is the one you want to use with your app. Note that the input node name is 'input_1` and the output node name is `deprocess_stylized_image_1/mul`.
 
 # Train on Google Cloud ML
 
@@ -173,3 +196,7 @@ gcloud ml-engine jobs submit training `whoami`_style_transfer`date +%s` \
 ```
 
 Distributed training and TPUs are not yet supported.
+
+# Add the model to your app with Fritz
+
+Now that you have a style transfer model that works for both iOS and Android, head over to [https://fritz.ai](https://fritz.ai) for tools to help you integrate it into your app and manage it over time.

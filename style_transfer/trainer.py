@@ -247,13 +247,22 @@ def _create_networks(
         image_size,
         alpha=1.0,
         input_tensor=None,
-        fine_tune_checkpoint=None):
-    transfer_net = models.StyleTransferNetwork.build(
-        image_size,
-        alpha=alpha,
-        input_tensor=input_tensor,
-        checkpoint_file=fine_tune_checkpoint
-    )
+        fine_tune_checkpoint=None,
+        use_small_network=False):
+    if use_small_network:
+        transfer_net = models.SmallStyleTransferNetwork.build(
+            image_size,
+            alpha=alpha,
+            input_tensor=input_tensor,
+            checkpoint_file=fine_tune_checkpoint
+        )
+    else:
+        transfer_net = models.StyleTransferNetwork.build(
+            image_size,
+            alpha=alpha,
+            input_tensor=input_tensor,
+            checkpoint_file=fine_tune_checkpoint
+        )
     # Create a VGG feature extractor for original image content
     original_content_in = layers.VGGNormalize()(transfer_net.input)
     content_net = models.IntermediateVGG(input_tensor=original_content_in)
@@ -365,7 +374,8 @@ def train(
         log_interval=10,
         checkpoint_interval=10,
         fine_tune_checkpoint=None,
-        gcs_bucket=None):
+        gcs_bucket=None,
+        use_small_network=False):
     """Train the Transfer Network.
 
     The training procedure consists of iterating over images in
@@ -397,6 +407,10 @@ def train(
                         Default 10 iterations.
         checkpoint_interval - the interval at which to save model
                               checkpoints. Default 10
+        fine_tune_checkpoint - a keras file to load first so a network can be
+            fine tuned
+        gcs_bucket - a toplevel bucket to save models to when using GCS
+        use_small_network - if true, use a very small network architecture
     """
     # Get all of the images from the input dataset
     dataset_iterator, style_imgs = _get_inputs(
@@ -410,7 +424,8 @@ def train(
         image_size,
         alpha=alpha,
         input_tensor=dataset_iterator.get_next(),
-        fine_tune_checkpoint=fine_tune_checkpoint
+        fine_tune_checkpoint=fine_tune_checkpoint,
+        use_small_network=use_small_network
     )
 
     logger.info('Setting up network for training.')

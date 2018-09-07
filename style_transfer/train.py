@@ -96,6 +96,11 @@ if __name__ == '__main__':
         '--gcs-bucket', type=str,
         help='a gcs bucket to save results to.'
     )
+    parser.add_argument(
+        '--use-small-network', action='store_true',
+        help=('Use a very small network architecture that works in real time '
+              'on some mobile devices using only CPU')
+    )
 
     args, unknown = parser.parse_known_args()
 
@@ -130,6 +135,7 @@ if __name__ == '__main__':
         checkpoint_interval=args.checkpoint_interval,
         fine_tune_checkpoint=args.fine_tune_checkpoint,
         norm_by_channels=norm_by_channels,
-        gcs_bucket=args.gcs_bucket
+        gcs_bucket=args.gcs_bucket,
+        use_small_network=args.use_small_network,
     )
     logger.info('Done.')

@@ -133,7 +133,7 @@ class StyleTransferNetwork(object):
         return out
 
     @classmethod
-    def _upsample(cls, x, n_filters, kernel_size):
+    def _upsample(cls, x, n_filters, kernel_size, size=2):
         """Construct an upsample block.
 
         Args:
@@ -144,10 +144,56 @@ class StyleTransferNetwork(object):
         Returns:
             out - a keras layer as output
         """
-        out = keras.layers.UpSampling2D()(x)
+        out = keras.layers.UpSampling2D(size=size)(x)
         # out = keras.layers.ZeroPadding2D(padding=(2, 2))(out)
         out = cls._convolution(out, n_filters, kernel_size, padding='same')
         return out
+
+
+class SmallStyleTransferNetwork(StyleTransferNetwork):
+
+    @classmethod
+    def build(cls, image_size, alpha=1.0, input_tensor=None, checkpoint_file=None):
+        """Build a Smaller Transfer Network Model using keras' functional API.
+
+        This architecture removes some blocks of layers and reduces the size
+        of convolutions to save on computation.
+
+        Args:
+            image_size - the size of the input and output image (H, W)
+            alpha - a width parameter to scale the number of channels by
+
+        Returns:
+            model: a keras model object
+        """
+        x = keras.layers.Input(
+            shape=(image_size[0], image_size[1], 3), tensor=input_tensor)
+        out = cls._convolution(x, int(alpha * 32), 3, strides=2)
+        out = cls._convolution(out, int(alpha * 64), 3, strides=2)
+        out = cls._residual_block(out, int(alpha * 64))
+        out = cls._residual_block(out, int(alpha * 64))
+        out = cls._residual_block(out, int(alpha * 64))
+        out = cls._upsample(out, int(alpha * 64), 3)
+        out = cls._upsample(out, int(alpha * 32), 3, size=2)
+        # Add a layer of padding to keep sizes consistent.
+        # out = keras.layers.ZeroPadding2D(padding=(1, 1))(out)
+        out = cls._convolution(out, 3, 3, relu=False, padding='same')
+        # Restrict outputs of pixel values to -1 and 1.
+        out = keras.layers.Activation('tanh')(out)
+        # Deprocess the image into valid image data. Note we'll need to define
+        # a custom layer for this in Core ML as well.
+        out = layers.DeprocessStylizedImage()(out)
+        model = keras.models.Model(inputs=x, outputs=out)
+
+        # Optionally load weights from a checkpoint
+        if checkpoint_file:
+            logger.info(
+                'Loading weights from checkpoint: %s' % checkpoint_file
+            )
+            if checkpoint_file.startswith('gs://'):
+                checkpoint_file = utils.copy_file_from_gcs(checkpoint_file)
+            model.load_weights(checkpoint_file, by_name=True)
+        return model
 
 
 class IntermediateVGG(object):
