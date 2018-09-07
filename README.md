@@ -1,6 +1,9 @@
 # fritz-style-transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
+<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/dog.jpg" width="256" height="256">
+<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/stylized_dog.jpg" width="256" height="256">
+
 # Add style transfer to your app in minutes with Fritz
 
 If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
@@ -200,3 +203,4 @@ Distributed training and TPUs are not yet supported.
 # Add the model to your app with Fritz
 
 Now that you have a style transfer model that works for both iOS and Android, head over to [https://fritz.ai](https://fritz.ai) for tools to help you integrate it into your app and manage it over time.
+
