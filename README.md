@@ -24,7 +24,7 @@ the `create_training_dataset.py` script will download and unzip this data then p
 ```
 python create_training_dataset.py \
 --output example/training_images.tfrecord \
---coco-image-dir path/to/coco/ \
+--image-dir path/to/coco/ \
 --num-images 10
 ```
 
