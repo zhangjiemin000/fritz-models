@@ -17,6 +17,8 @@ class VGGNormalize(keras.layers.Layer):
             **kwargs - arguments passed to the Keras layer base.
         """
         super(VGGNormalize, self).__init__(**kwargs)
+        # work around for a bug introduced in diffences between the tf.keras and keras APIs
+        self.outbound_nodes = self._outbound_nodes
 
     def build(self, input_shape):
         """Build the layer."""
