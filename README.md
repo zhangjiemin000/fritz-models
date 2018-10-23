@@ -108,7 +108,7 @@ python convert_to_tfmobile.py \
 --output-dir example/
 ```
 
-This produces a number of TensorFlow graph formats. The `*_optimized.pb` graph file is the one you want to use with your app. Note that the input node name is 'input_1` and the output node name is `deprocess_stylized_image_1/mul`.
+This produces a number of TensorFlow graph formats. The `*_optimized.pb` graph file is the one you want to use with your app. Note that the input node name is `input_1` and the output node name is `deprocess_stylized_image_1/mul`.
 
 # Train on Google Cloud ML
 
