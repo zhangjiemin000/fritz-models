@@ -42,7 +42,7 @@ def load_image(
     img = file_io.read_file_to_string(filename, binary_mode=True)
     img = PIL.Image.open(io.BytesIO(img))
     img = img.resize((width, height), resample=PIL.Image.BILINEAR)
-    img = numpy.array(img)
+    img = numpy.array(img)[:, :, :3]
 
     if expand_dims:
         img = numpy.expand_dims(img, axis=0)
