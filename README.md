@@ -8,6 +8,10 @@ Code for training artistic style transfer models with Keras and converting them 
 
 If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-style-transfer). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
 
+# 11-21-2018: Train your own custom style model in 20 minutes
+
+You can now train your own personal style transfer model in about 20 minutes using Fritz Style Transfer and Google Colab. Just create your own playground from [this notebook](https://colab.research.google.com/drive/1nDkxLKBgZGFscGoF0tfyPMGqW03xITl0#scrollTo=L9aTwLIqtFTE) to get started. You can read more about how it works [here](https://heartbeat.fritz.ai/20-minute-masterpiece-4b6043fdfff5).
+
 # Installation
 
 If you're not installing using a package manager like `pip`, make sure the root directory is on your `PYTHONPATH`:
