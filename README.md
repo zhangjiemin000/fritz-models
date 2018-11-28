@@ -1,8 +1,7 @@
 # fritz-style-transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
-<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/dog.jpg" width="256" height="256">
-<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/stylized_dog.jpg" width="256" height="256">
+<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/starry_night_example.jpg" width="662" height="295">
 
 # Add style transfer to your app in minutes with Fritz
 
