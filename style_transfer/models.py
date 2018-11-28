@@ -168,16 +168,15 @@ class SmallStyleTransferNetwork(StyleTransferNetwork):
         """
         x = keras.layers.Input(
             shape=(image_size[0], image_size[1], 3), tensor=input_tensor)
-        out = cls._convolution(x, int(alpha * 32), 3, strides=2)
-        out = cls._convolution(out, int(alpha * 64), 3, strides=2)
-        out = cls._residual_block(out, int(alpha * 64))
-        out = cls._residual_block(out, int(alpha * 64))
-        out = cls._residual_block(out, int(alpha * 64))
-        out = cls._upsample(out, int(alpha * 64), 3)
-        out = cls._upsample(out, int(alpha * 32), 3, size=2)
-        # Add a layer of padding to keep sizes consistent.
-        # out = keras.layers.ZeroPadding2D(padding=(1, 1))(out)
-        out = cls._convolution(out, 3, 3, relu=False, padding='same')
+        out = cls._convolution(x, int(alpha * 32), 9, strides=1)
+        out = cls._convolution(out, int(alpha * 32), 3, strides=2)
+        out = cls._convolution(out, int(alpha * 32), 3, strides=2)
+        out = cls._residual_block(out, int(alpha * 32))
+        out = cls._residual_block(out, int(alpha * 32))
+        out = cls._residual_block(out, int(alpha * 32))
+        out = cls._upsample(out, int(alpha * 32), 3)
+        out = cls._upsample(out, int(alpha * 32), 3)
+        out = cls._convolution(out, 3, 9, relu=False, padding='same')
         # Restrict outputs of pixel values to -1 and 1.
         out = keras.layers.Activation('tanh')(out)
         # Deprocess the image into valid image data. Note we'll need to define
