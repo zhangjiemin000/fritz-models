@@ -3,6 +3,8 @@ Code for training artistic style transfer models with Keras and converting them 
 
 <img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/starry_night_results.jpg" width="662" height="295">
 
+Left: Original image. Middle: Image stylzed with a 17kb small model. Right: Image stylzed by the default large model.
+
 # Add style transfer to your app in minutes with Fritz
 
 If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-style-transfer). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
