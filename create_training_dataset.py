@@ -13,6 +13,11 @@ logger = logging.getLogger('create_training_dataset')
 
 _COCO_ZIP_URL = 'http://images.cocodataset.org/zips/train2014.zip'
 
+try:
+    raw_input          # Python 3
+except NameError:
+    raw_input = input  # Python 3
+
 
 class DatasetCreator(object):
     """A class to preprocess images from the COCO training data.
