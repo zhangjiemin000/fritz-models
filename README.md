@@ -23,9 +23,9 @@ If you'd like to incorporate any of these models or versions you've trained into
 [Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=fritz-models) is a community of developers interested in the intesection of mobile and machine learning. [Chat with us in Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtMzY5OTM1MzgyODIzLTZhNTFjYmRiODU0NjZjNjJlOGRjYzI2OTIwY2M4YTBiNjM1ODU1ZmU3Y2Q2MmMzMmI2ZTIzZjQ1ZWI3NzBkZGU) and stay up to date on the latest mobile ML news with our [Newsletter](https://mobileml.us16.list-manage.com/subscribe?u=de53bead690affb8e9a21de8f&id=68acb5c0fd).
 
 ## A note about large files
-Large files like model checkpoints, data, and archives of compiled code are managed via `git lfs`. Make sure you have that installed before using.
+Large files like model checkpoints, data, and archives of compiled code are managed via `git lfs`. You need to have Git LFS installed in order to download these files. Installation instructions are available [here](https://github.com/git-lfs/git-lfs#getting-started).
 
-By default, >200mb of model checkpoints are downloaded automatically when this repo is cloned unless you've turned Git LFS Smudging off by default. This can take a while and require a good connection. To clone this repository without downloading the model checkpoints, you can run:
+If you have Git LFS installed, large files will download automatically by default. This can take a while and require a good connection. To clone this repository without downloading the model checkpoints, you can run:
 
 ```
 GIT_LFS_SKIP_SMUDGE=1 git clone ...
