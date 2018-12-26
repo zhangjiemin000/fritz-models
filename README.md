@@ -3,6 +3,9 @@ A collection of machine and deep learning models designed to run on mobile devic
 
 Models in this repository contain code and utility for training models as well as converting them to mobile-friendly formats like Core ML, TensorFlow Mobile, and TensorFlow Lite.
 
+## Update: 12/26/2018
+For convinience, we've consolodated a few open source projects into a single repository. `fritz-style-transfer` has been renamed `fritz-models`. Have no fear, all of the code for style transfer lives in the `style_transfer` sub-directory.
+
 ## Models
 
 * [Style Transfer](https://github.com/fritzlabs/fritz-models/tree/master/style_transfer): Transform images into works of art by transfering the style of one image onto the content of another.
