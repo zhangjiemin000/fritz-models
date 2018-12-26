@@ -1,4 +1,4 @@
-# Image Segmentation
+# Fritz Image Segmentation
 A Core ML compatible implementation of semantic segmentation with ICNet in Keras.
 
 ## Installation
@@ -44,7 +44,7 @@ This script also automatically outputs a new set of labels and indices in a file
 ## Training
 The model can be trained using the `train.py` script.
 
-Before you start, make sure the `image_segmentation` model is on your $PYTHONPATH. From the `fritz-image-segmentation` root directory.
+Before you start, make sure the `image_segmentation` model is on your $PYTHONPATH. From the `fritz-models/image_segmentation` directory.
 
 ```
 export PYTHONPATH=$PYTHONPATH:`pwd`
@@ -70,14 +70,14 @@ By default, a model weights checkpoint is saved every epoch. Note that only weig
 Zip up all of the local files to send up to Google Cloud.
 
 ```
-# from fritz-image-segmentation/
+# from fritz-models/image_segmentation/
 python setup.py sdist
 ```
 Run the training job.
 
 ```
 export LABEL_SET=living_room
-export YOUR_GCS_BUCKET=fritz-image-segmentation
+export YOUR_GCS_BUCKET=<YOUR_BUCKET_HERE>
 gcloud ml-engine jobs submit training `whoami`_image_segmentation_`date +%s` \
     --runtime-version 1.9 \
     --job-dir=gs://${YOUR_GCS_BUCKET} \
@@ -94,7 +94,7 @@ gcloud ml-engine jobs submit training `whoami`_image_segmentation_`date +%s` \
     --num-steps 5000 \
     --batch-size 24 \
     --model-name ${LABEL_SET} \
-    --gcs-bucket gs://fritz-image-segmentation/train
+    --gcs-bucket gs://${YOUR_GCS_BUCKET}/train
 ```
 
 ## Converting to Core ML
@@ -104,18 +104,18 @@ The resulting Keras model can be converted using the script provided. It uses th
 python convert_to_coreml.py --alpha 0.25 ${LABEL_SET}_768x768_025.h5 ${LABEL_SET}_768x768_025.mlmodel
 ```
 
-Once you've got your Core ML model, you can use [Fritz](https://www.fritz.ai) to integrate, deploy, and manage it in your app. For more tutorials on mobile machine learning, check out [Heartbeat](https://heartbeat.fritz.ai).
+Once you've got your Core ML model, you can use [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation) to integrate, deploy, and manage it in your app. For more tutorials on mobile machine learning, check out [Heartbeat](https://heartbeat.fritz.ai?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation).
 
 ## Benchmarks
 On a Google Cloud Compute GPU instance with a single K80, a single epoch containing roughly 1600 768x768 images takes 20 minutes. Average cross-categorical accuracy reached >80% after 12 hours. An additional 3 hours of training with a learning rate of 0.00001 increased accuracy to ~87%. Inferences with a 768x768 model can be made at 8-9fps on an iPhone X.
 
 ## Example - Living Room Objects
 
-<img src="https://github.com/fritzlabs/fritz-image-segmentation/blob/master/examples/living_room.jpg?raw=true" width="300" height="200">
-<img src="https://github.com/fritzlabs/fritz-image-segmentation/blob/master/examples/example_image_and_mask.png?raw=true" width="300" height="200">
-<img src="https://github.com/fritzlabs/fritz-image-segmentation/blob/master/examples/example_pixel_probabilities.png?raw=true" width="500" height="500">
+<img src="https://github.com/fritzlabs/fritz-models/blob/master/image_segmentation/examples/living_room.jpg?raw=true" width="300" height="200">
+<img src="https://github.com/fritzlabs/fritz-models/blob/master/image_segmentation/examples/example_image_and_mask.png?raw=true" width="300" height="200">
+<img src="https://github.com/fritzlabs/fritz-models/blob/master/image_segmentation/examples/example_pixel_probabilities.png?raw=true" width="500" height="500">
 
-Download the [mlmodel](https://github.com/fritzlabs/fritz-image-segmentation/blob/master/examples/icnet_768x768_living_room.mlmodel).
+Download the [mlmodel](https://github.com/fritzlabs/fritz-models/blob/master/image_segmentation/examples/icnet_768x768_living_room.mlmodel).
 
 ## Additional resources
 

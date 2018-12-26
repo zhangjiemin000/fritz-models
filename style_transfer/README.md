@@ -1,17 +1,17 @@
-# fritz-style-transfer
+# Fritz Style Transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
-<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/style_transfer/example/starry_night_results.jpg" width="662" height="295">
+<img src="https://github.com/fritzlabs/fritz-models/blob/master/style_transfer/example/starry_night_results.jpg" width="662" height="295">
 
 Left: Original image. Middle: Image stylzed with a 17kb small model. Right: Image stylzed by the default large model.
 
 # Add style transfer to your app in minutes with Fritz
 
-If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-style-transfer). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
+If you're looking to add style transfer to your app quickly, check out [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-models&utm_content=style-transfer). The Fritz SDK provides 11 pre-trained style transfer models along with all the code you need to apply them images or live video. If you want to train your own model, keep reading.
 
 # 11-21-2018: Train your own custom style model in 20 minutes
 
-You can now train your own personal style transfer model in about 20 minutes using Fritz Style Transfer and Google Colab. Just create your own playground from [this notebook](https://colab.research.google.com/drive/1nDkxLKBgZGFscGoF0tfyPMGqW03xITl0#scrollTo=L9aTwLIqtFTE) to get started. You can read more about how it works [here](https://heartbeat.fritz.ai/20-minute-masterpiece-4b6043fdfff5).
+You can now train your own personal style transfer model in about 20 minutes using Fritz Style Transfer and Google Colab. Just create your own playground from [this notebook](https://colab.research.google.com/drive/1nDkxLKBgZGFscGoF0tfyPMGqW03xITl0#scrollTo=L9aTwLIqtFTE) to get started. You can read more about how it works [here](https://heartbeat.fritz.ai/20-minute-masterpiece-4b6043fdfff5?utm_source=github&utm_campaign=fritz-models&utm_content=style-transfer).
 
 # Installation
 
@@ -142,7 +142,7 @@ To make things easier, start by setting some environmental variables.
 
 ```
 export YOUR_GCS_BUCKET=your_gcs_bucket
-export FRITZ_STYLE_TRANSFER_PATH=/path/to/fritz-style-transfer
+export FRITZ_STYLE_TRANSFER_PATH=/path/to/fritz-models/style_transfer/
 export KERAS_CONTRIB_PATH=/path/to/keras-contrib
 export STYLE_NAME=style_name
 ```
@@ -207,5 +207,4 @@ Distributed training and TPUs are not yet supported.
 
 # Add the model to your app with Fritz
 
-Now that you have a style transfer model that works for both iOS and Android, head over to [https://fritz.ai](https://fritz.ai/?utm_source=github&utm_campaign=fritz-style-transfer) for tools to help you integrate it into your app and manage it over time.
-
+Now that you have a style transfer model that works for both iOS and Android, head over to [https://fritz.ai](https://fritz.ai/?utm_source=github&utm_campaign=fritz-models&utm_content=style-transfer) for tools to help you integrate it into your app and manage it over time.

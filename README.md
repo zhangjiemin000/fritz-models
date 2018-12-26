@@ -24,3 +24,9 @@ If you'd like to incorporate any of these models or versions you've trained into
 
 ## A note about large files
 Large files like model checkpoints, data, and archives of compiled code are managed via `git lfs`. Make sure you have that installed before using.
+
+By default, >200mb of model checkpoints are downloaded automatically when this repo is cloned unless you've turned Git LFS Smudging off by default. This can take a while and require a good connection. To clone this repository without downloading the model checkpoints, you can run:
+
+```
+GIT_LFS_SKIP_SMUDGE=1 git clone ...
+```
