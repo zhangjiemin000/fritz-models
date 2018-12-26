@@ -1,4 +1,4 @@
-# Image Segmentation
+# Fritz Image Segmentation
 A Core ML compatible implementation of semantic segmentation with ICNet in Keras.
 
 ## Installation
@@ -44,7 +44,7 @@ This script also automatically outputs a new set of labels and indices in a file
 ## Training
 The model can be trained using the `train.py` script.
 
-Before you start, make sure the `image_segmentation` model is on your $PYTHONPATH. From the `fritz-image-segmentation` root directory.
+Before you start, make sure the `image_segmentation` model is on your $PYTHONPATH. From the `fritz-models/image_segmentation` directory.
 
 ```
 export PYTHONPATH=$PYTHONPATH:`pwd`
@@ -70,7 +70,7 @@ By default, a model weights checkpoint is saved every epoch. Note that only weig
 Zip up all of the local files to send up to Google Cloud.
 
 ```
-# from fritz-image-segmentation/
+# from fritz-models/image_segmentation/
 python setup.py sdist
 ```
 Run the training job.

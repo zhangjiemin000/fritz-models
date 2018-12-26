@@ -1,7 +1,7 @@
-# fritz-style-transfer
+# Fritz Style Transfer
 Code for training artistic style transfer models with Keras and converting them to Core ML.
 
-<img src="https://github.com/fritzlabs/fritz-style-transfer/blob/master/example/starry_night_results.jpg" width="662" height="295">
+<img src="https://github.com/fritzlabs/fritz-models/blob/master/style_transfer/example/starry_night_results.jpg" width="662" height="295">
 
 Left: Original image. Middle: Image stylzed with a 17kb small model. Right: Image stylzed by the default large model.
 
@@ -142,7 +142,7 @@ To make things easier, start by setting some environmental variables.
 
 ```
 export YOUR_GCS_BUCKET=your_gcs_bucket
-export FRITZ_STYLE_TRANSFER_PATH=/path/to/fritz-style-transfer
+export FRITZ_STYLE_TRANSFER_PATH=/path/to/fritz-models/style_transfer/
 export KERAS_CONTRIB_PATH=/path/to/keras-contrib
 export STYLE_NAME=style_name
 ```
@@ -208,5 +208,3 @@ Distributed training and TPUs are not yet supported.
 # Add the model to your app with Fritz
 
 Now that you have a style transfer model that works for both iOS and Android, head over to [https://fritz.ai](https://fritz.ai/?utm_source=github&utm_campaign=fritz-models&utm_content=style-transfer) for tools to help you integrate it into your app and manage it over time.
-
-
