@@ -20,7 +20,7 @@
 
 * [Hive](https://thehive.ai/) - Data labeling, Computer Vision models, and media platform 
 
-* [MicroWorkers](https://microwork.io/) - Image and video annotation services for AI
+* [Microwork](https://microwork.io/) - Image and video annotation services for AI
 
 ## Synthetic Data
 
