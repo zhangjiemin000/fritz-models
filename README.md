@@ -21,7 +21,7 @@ If you'd like to incorporate any of these models or versions you've trained into
 
 ## Additional resources
 
-Additional, [non-code resources](https://github.com/fritzlabs/fritz-models/blob/master/resources/README.md) for machine learning and AI.
+Additional, [non-code resources](resources/README.md) for machine learning and AI.
 
 * [AI and ML Landscape](resources/AI_Landscape.md): our curated list of helpful products and services for AI and machine learning.
 
