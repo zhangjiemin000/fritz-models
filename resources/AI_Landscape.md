@@ -1,5 +1,9 @@
 # AI and Machine Learning Landscape
 
+## Contribute to this list
+
+The AI and Machine Learning landscape is rapidly changing. We welcome additions and changes to this list!
+
 ## Data Labeling
 
 * [Labelbox](https://www.labelbox.com/) - Platform for creating and managing training data
@@ -52,7 +56,7 @@
 
 * [Paperspace](https://www.paperspace.com/) - GPU cloud platform (w/ API), AI/ML infrastructure product
 
-* [RiseML](https://riseml.com/) - Machine Learning Platform for Kubernetes 
+* [RiseML](https://riseml.com/) - Machine Learning Platform for Kubernetes (:cry: - Sunsetting March 31, 2019) 
 
 * [Spell](https://www.spell.run/) - Infrastructure for AI and deep learning experiments and collaboration 
 
@@ -127,6 +131,8 @@
 * [H20 AI](https://h2o.ai) - Open source ML platform
 
 * [DataRobot](https://www.datarobot.com/) - Automated ML platform for predictive modeling
+
+* [Fritz](https://fritz.ai/) - End-to-end platform designed to help mobile developers and ML engineers train and deploy models in mobile apps
 
 ## Other
 
