@@ -19,6 +19,12 @@ To see live demonstrations of these models running on-device, the Heartbeat App 
 
 If you'd like to incorporate any of these models or versions you've trained into your own app, head over to [Fritz](https://fritz.ai/?utm_source=github&utm_campaign=fritz-models). SDKs are available for both iOS and Android.
 
+## Additional resources
+
+Additional, [non-code resources](resources/README.md) for machine learning and AI.
+
+* [AI and ML Landscape](resources/AI_Landscape.md): our curated list of helpful products and services for AI and machine learning.
+
 ## Join the community
 [Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=fritz-models) is a community of developers interested in the intesection of mobile and machine learning. [Chat with us in Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtMzY5OTM1MzgyODIzLTZhNTFjYmRiODU0NjZjNjJlOGRjYzI2OTIwY2M4YTBiNjM1ODU1ZmU3Y2Q2MmMzMmI2ZTIzZjQ1ZWI3NzBkZGU) and stay up to date on the latest mobile ML news with our [Newsletter](https://mobileml.us16.list-manage.com/subscribe?u=de53bead690affb8e9a21de8f&id=68acb5c0fd).
 
