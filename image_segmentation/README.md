@@ -61,7 +61,8 @@ python image_segmentation/train.py \
     -n 10 \
     -s 768 \
     -a 0.25 \
-    -o data/${LABEL_SET}/${LABEL_SET}_icnet_768x768_025.h5
+    -o data/${LABEL_SET}/${LABEL_SET}_icnet_768x768_025.h5 \
+    --model-name ${LABEL_SET}
 ```
 
 By default, a model weights checkpoint is saved every epoch. Note that only weights are saved, not the full model. This is to make it easier to build models for training vs inference.
