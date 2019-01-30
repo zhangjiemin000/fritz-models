@@ -5,9 +5,11 @@ Models in this repository contain code and utility for training models as well a
 
 ## Models
 
-* [Style Transfer](https://github.com/fritzlabs/fritz-models/tree/master/style_transfer): Transform images into works of art by transfering the style of one image onto the content of another.
-* [Image Segmentation](https://github.com/fritzlabs/fritz-models/tree/master/image_segmentation): Semantic segmentation of images. Assign a value to each pixel of an image corresponding to the type of object it belongs to.
-* [Create ML Playgrounds](https://github.com/fritzlabs/fritz-models/tree/master/create_ml_playgrounds): A series of playgrounds for training models with Apple's Create ML tool
+* [Image Labeling](image_labeling/): Label images based on their content.
+* [Object Detection](object_detection/): Localize and label objects in an image with a bounding box.
+* [Style Transfer](style_transfer/): Transform images into works of art by transfering the style of one image onto the content of another.
+* [Image Segmentation](image_segmentation/): Semantic segmentation of images. Assign a value to each pixel of an image corresponding to the type of object it belongs to.
+* [Create ML Playgrounds](create_ml_playgrounds/): A series of playgrounds for training models with Apple's Create ML tool
 
 Don't see the model you're looking for? Open an issue and let us know!
 
