@@ -15,7 +15,7 @@ From this directory, run:
 export PYTHONPATH=$PYTHONPATH:`pwd`
 ```
 
-## Downaload Data
+## Download Data
 The model is trained on the [ADE20K dataset](http://groups.csail.mit.edu/vision/datasets/ADE20K/) provided by MIT. You can download and prepare this data for training using this [handy script](https://github.com/tensorflow/models/blob/master/research/deeplab/datasets/download_and_convert_ade20k.sh) provided in the `TensorFlow/models/research/deeplab` repo on GitHub.
 
 The dataset contains >20,000 images and corresponding segmentation masks. Masks asign one of 150 categories to each individual pixel of the image. A list of object classes is included in this repo: [objectInfo150.txt]()
