@@ -186,13 +186,13 @@ def _prepare_dali(args, n_classes):
     batch_size = args.batch_size
     image_size = args.image_size
     device_id = 0
-    storage_client = storage.Client()
     filenames = []
 
     for filename in args.data:
         if filename.startswith('gs://'):
             parts = filename[5:].split('/')
             bucket_name, blob_name = parts[0], '/'.join(parts[1:])
+            storage_client = storage.Client()
             bucket = storage_client.get_bucket(bucket_name)
             blob = bucket.blob(blob_name)
             download_filename = os.path.basename(blob_name)
