@@ -1,5 +1,11 @@
 # Fritz Image Segmentation
-A Core ML compatible implementation of semantic segmentation with ICNet in Keras.
+A library for training mobile-friendly semantic segmentation models.
+
+Semantic segmentation models take an image as input and output a class prediction for each pixel, effectively masking objects.
+
+You can add image segmentation to your app for free at [www.fritz.ai](https://www.fritz.ai/features/image-segmentation.html?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation). Ready-to-use image segmentation APIs are available for three scenes: `people`, `outdoors`, `living rooms`.
+
+If you'd like to train a custom image segmentation model, you can follow the instructions below. Pre-packaged, easy to use notebooks are available via our [Premium plan](https://www.fritz.ai/pricing/?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation). For more information, contact us at [help@fritz.ai](mailto:help@fritz.ai).
 
 ## Installation
 
@@ -123,3 +129,12 @@ Download the [mlmodel](https://github.com/fritzlabs/fritz-models/blob/master/ima
 * [Original ICNet Implementation](https://github.com/hszhao/ICNet)
 * [Keras-ICNet](https://github.com/aitorzip/Keras-ICNet)
 * [ICNet-tensorflow](https://github.com/hellochick/ICNet-tensorflow)
+
+## What's next?
+
+* Get a free [Fritz account](https://www.fritz.ai?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation).
+* Read the [docs](https://docs.fritz.ai?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation).
+* Learn more about mobile machine learning on [Heartbeat](https://heartbeat.fritz.ai/?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation).
+* Stay up-to-date with the [Heartbeat Newsletter](http://eepurl.com/c_verH)
+* Join us [on Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtNTI4MDcxMzI1MzAwLWIyMjRmMGYxYjUwZmE3MzA0MWQ0NDk0YjA2NzE3M2FjM2Y5MjQxMWM2MmQ4ZTdjNjViYjM3NDE0OWQxOTBmZWI).
+* Follow us on Twitter: [@fritzlabs](https://twitter.com/fritzlabs)
