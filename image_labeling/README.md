@@ -6,7 +6,7 @@ Image labeling takes a picture as input and outputs a single label describing th
 
 You can add image labeling to your app for free at [www.fritz.ai](https://www.fritz.ai/features/image-labeling.html?utm_campaign=fritz-models&utm_content=image-labeling). The ready-to-use image labeling APIs can produce over 600 different labels.
 
-If you'd like to train a custom image labeling model using your own data, templates are available via our [Premium plan](https://www.fritz.ai/pricing/?utm_campaign=fritz-models&utm_content=image-labeling). For more information, contact us at [help@fritz.ai](mailto:help@fritz.ai).
+If you'd like to train a custom image labeling model using your own data, pre-packaged, easy to use notebooks are available via our [Premium plan](https://www.fritz.ai/pricing/?utm_campaign=fritz-models&utm_content=image-labeling). For more information, contact us at [help@fritz.ai](mailto:help@fritz.ai).
 
 ## What's next?
 

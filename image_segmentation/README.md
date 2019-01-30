@@ -5,7 +5,7 @@ Semantic segmentation models take an image as input and output a class predictio
 
 You can add image segmentation to your app for free at [www.fritz.ai](https://www.fritz.ai/features/image-segmentation.html?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation). Ready-to-use image segmentation APIs are available for three scenes: `people`, `outdoors`, `living rooms`.
 
-If you'd like to train a custom image segmentation model, you can follow the instructions below. Pre-packaged, easy to use templates are available via our [Premium plan](https://www.fritz.ai/pricing/?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation). For more information, contact us at [help@fritz.ai](mailto:help@fritz.ai).
+If you'd like to train a custom image segmentation model, you can follow the instructions below. Pre-packaged, easy to use notebooks are available via our [Premium plan](https://www.fritz.ai/pricing/?utm_source=github&utm_campaign=fritz-models&utm_content=image-segmentation). For more information, contact us at [help@fritz.ai](mailto:help@fritz.ai).
 
 ## Installation
 
