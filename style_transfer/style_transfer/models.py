@@ -103,7 +103,7 @@ class StyleTransferNetwork(object):
         # an implementation of Instance Normalization. Note here that we are
         # specifying the normalization axis to be -1, or the channel axis.
         # By default this is None and simple Batch Normalization is applied.
-        out = keras_contrib.layers.normalization.InstanceNormalization(
+        out = keras_contrib.layers.InstanceNormalization(
             axis=-1)(out)
         if relu:
             out = keras.layers.Activation('relu')(out)
