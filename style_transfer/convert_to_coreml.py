@@ -44,7 +44,7 @@ def main(argv):
     image_size = [int(dim) for dim in args.image_size.split(',')]
     # Map custom layers to their custom coreml converters
     custom_layers = {
-        keras_contrib.layers.normalization.InstanceNormalization: layer_converters.convert_instancenormalization,  # NOQA
+        keras_contrib.layers.InstanceNormalization: layer_converters.convert_instancenormalization,  # NOQA
         layers.DeprocessStylizedImage: layer_converters.convert_deprocessstylizedimage  # NOQA
     }
 
