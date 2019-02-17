@@ -36,7 +36,7 @@ if __name__ == '__main__':
     logger.info('Loading model from %s' % args.model_checkpoint)
     custom_objects = {
         'InstanceNormalization':
-            keras_contrib.layers.normalization.InstanceNormalization,
+            keras_contrib.layers.InstanceNormalization,
         'DeprocessStylizedImage': layers.DeprocessStylizedImage
     }
     transfer_net = keras.models.load_model(
