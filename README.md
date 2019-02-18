@@ -22,8 +22,10 @@ If you'd like to incorporate any of these models or versions you've trained into
 
 Additional, [non-code resources](resources/README.md) for machine learning and AI.
 
-* [AI and ML Landscape](resources/AI_Landscape.md): our curated list of helpful products and services for AI and machine learning.
-* [AI and ML Newsletters](resources/AI_ML_Newsletters.md): a list of relevant newsletters in AI and machine learning.
+* [AI and ML Landscape](resources/AI_Landscape.md): Our curated list of helpful products and services for AI and machine learning.
+* [AI and ML Newsletters](resources/AI_ML_Newsletters.md): A list of relevant newsletters in AI and machine learning.
+* [Mobile Development Newsletters](resources/Mobile_Newsletters.md): A list of relevant newsletters in iOS, Android, React Native, and Cross Platform development.
+* [Data Science Newsletters](resources/Data_Science_Newsletters.md): A list of relevant data science and data analytics newsletters. 
 * [Facebook Groups for AI/ML, Mobile, and Data Science](resources/AI_ML_Mobile_Facebook_Groups.md): A list of AI/ML, mobile dev, and data science Facebook communities.
 
 ## Join the community
