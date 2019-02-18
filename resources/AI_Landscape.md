@@ -2,7 +2,7 @@
 
 ## Contribute to this list
 
-The AI and Machine Learning landscape is rapidly changing. We welcome additions and changes to this list!
+The AI and Machine Learning landscape is rapidly changing. We welcome additions and changes to this list! Submit a pull request or let us know on [Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtNTI4MDcxMzI1MzAwLWIyMjRmMGYxYjUwZmE3MzA0MWQ0NDk0YjA2NzE3M2FjM2Y5MjQxMWM2MmQ4ZTdjNjViYjM3NDE0OWQxOTBmZWI)
 
 ## Data Labeling
 
