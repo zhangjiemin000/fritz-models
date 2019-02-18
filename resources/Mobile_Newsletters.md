@@ -1,7 +1,7 @@
 # Mobile Development Newsletters
 
 ## Contribute to this list
-We tried our best to find all relevant newsletters, but we might have missed some. We welcome additions to this list!
+We tried our best to find all relevant newsletters, but we might have missed some. Submit a pull request or let us know on [Slack](https://join.slack.com/t/heartbeat-by-fritz/shared_invite/enQtNTI4MDcxMzI1MzAwLWIyMjRmMGYxYjUwZmE3MzA0MWQ0NDk0YjA2NzE3M2FjM2Y5MjQxMWM2MmQ4ZTdjNjViYjM3NDE0OWQxOTBmZWI).
 
 ## iOS
 
