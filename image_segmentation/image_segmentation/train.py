@@ -269,16 +269,13 @@ def _prepare_dali(args, n_classes):
 
     daliop = dali_tf.DALIIterator()
     with tf.device('/gpu:0'):
-        results = daliop(
+        input_tensor, mask = daliop(
             serialized_pipeline=pipe.serialize(),
-            shapes=[(args.batch_size, args.image_size, args.image_size, 3), ()],
+            shapes=[(args.batch_size, args.image_size, args.image_size, 3),
+                    (batch_size, image_size, image_size, 3)],
             dtypes=[tf.int64, tf.int64],
         )
 
-    input_tensor = results.batch
-
-    results.label.set_shape([batch_size, image_size, image_size, 3])
-    mask = results.label
     new_shape = [image_size // 4, image_size // 4]
     mask_4 = ADE20KDatasetBuilder.scale_mask(mask, 4, new_shape, n_classes)
     new_shape = [image_size // 8, image_size // 8]
