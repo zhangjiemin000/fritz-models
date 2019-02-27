@@ -200,8 +200,9 @@ def build_tfindex_file(tfrecord_file, tfindex_file):
                          str(tfrecord_fp.tell() - current) + '\n')
             total_records += 1
         except Exception:
-            raise
-            print("Not a valid TFRecord file")
+            logger.exception(
+                f'Failed to parse TFRecord file after {total_records}'
+            )
             break
 
     tfrecord_fp.close()
