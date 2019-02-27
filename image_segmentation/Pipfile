@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [[source]]
-url = "https://developer.download.nvidia.com/compute/redist nvidia-dali-tf-plugin"
+url = "https://developer.download.nvidia.com/compute/redist"
 verify_ssl = true
 name = "nvidia"
 
@@ -12,7 +12,7 @@ name = "nvidia"
 fritz = "==1.0.0b3"
 google-cloud-storage = "*"
 coremltools = {editable = true,git = "https://github.com/ghop02/coremltools.git",ref = "upadted-keras-bilinear-sampling"}
-nvidia-dali-tf-plugin = "*"
+nvidia-dali-tf-plugin = {version="*", index="nvidia"}
 
 [dev]
 tensorflow = "*"
