@@ -394,6 +394,7 @@ def train(argv):
         loss=keras.losses.categorical_crossentropy,
         loss_weights=[1.0, 0.4, 0.16],
         metrics=['categorical_accuracy'],
+        weighted_metrics=['categorical_accuracy'],
         target_tensors=[
             data['mask_4'], data['mask_8'], data['mask_16']
         ]
@@ -431,7 +432,6 @@ def train(argv):
             filename,
             verbose=0,
             mode='auto',
-            weighted_metrics=['categorical_accuracy'],
             period=1
         ),
     ]
