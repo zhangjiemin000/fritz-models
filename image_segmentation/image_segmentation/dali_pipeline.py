@@ -117,7 +117,6 @@ class CommonPipeline(dali.pipeline.Pipeline):
         brightness = self.brightness_rng()
         crop_x = self.crop_x_rng()
         crop_y = self.crop_y_rng()
-        print(crop_x, crop_y)
         images = self.decode(inputs["image/encoded"])
         images = images.gpu()
         images = self.resize_large(images)
@@ -135,7 +134,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         masks = masks.gpu()
         masks = self.resize_large(masks)
         masks = self.rotate(masks, angle=angle)
-        masks = self.crop(masks, crop_pos_x=crop_x, crop_pos_y=crop_y)
+        # masks = self.crop(masks, crop_pos_x=crop_x, crop_pos_y=crop_y)
         masks = self.resize(masks)
         masks = self.flip(masks, horizontal=coin)
 
