@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 tensorflow = "*"
-fritz = {path = "../../fritz-python-private",editable = true,extras = ["train"]}
+fritz = "==1.0.0b3"
 google-cloud-storage = "*"
 coremltools = {editable = true,git = "https://github.com/ghop02/coremltools.git",ref = "upadted-keras-bilinear-sampling"}
 
