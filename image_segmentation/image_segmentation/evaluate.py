@@ -38,14 +38,11 @@ class EvaluateImageSegmentationModel(object):
 
         return self.model.predict(img_data[None, :, :, :])
 
-    def generate_prediction_images(self):
-        for record in self.tfrecords.read(decode=True):
-            result = self.run_prediction(record)
-
-            image = record['image'].resize(self.input_shape)
-            yield plot_image_and_mask(
+    def generate_prediction_image(self, record, prediction):
+        image = record['image'].resize(self.input_shape)
+        yield plot_image_and_mask(
                 numpy.array(image),
-                result[0][0, :, :],
+                prediction[0][0, :, :],
                 reference_mask=record['mask'],
                 alpha=0.9,
                 small=True
@@ -85,8 +82,6 @@ def plot_image_and_mask(img, mask, alpha=0.6, deprocess_func=None,
     fig.add_subplot(rows, columns, column_index)
 
     pyplot.imshow(img.astype(int))
-    print(img.shape)
-    print(max_mask.shape)
     pyplot.imshow(
         skimage.transform.resize(
             max_mask,
