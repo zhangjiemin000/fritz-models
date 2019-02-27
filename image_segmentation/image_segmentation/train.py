@@ -273,7 +273,7 @@ def _prepare_dali(args, n_classes):
             serialized_pipeline=pipe.serialize(),
             shapes=[(args.batch_size, args.image_size, args.image_size, 3),
                     (batch_size, image_size, image_size, 3)],
-            dtypes=[tf.int64, tf.int64],
+            dtypes=[tf.float64, tf.int64],
         )
 
     new_shape = [image_size // 4, image_size // 4]
