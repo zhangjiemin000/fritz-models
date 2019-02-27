@@ -431,6 +431,7 @@ def train(argv):
             filename,
             verbose=0,
             mode='auto',
+            weighted_metrics=['categorical_accuracy'],
             period=1
         ),
     ]
@@ -466,6 +467,11 @@ def train(argv):
         steps_per_epoch=steps_per_epoch,
         epochs=epochs,
         callbacks=callbacks,
+        class_weight={
+            0: 1.0,
+            1: 15.0,
+        },
+
     )
 
 
