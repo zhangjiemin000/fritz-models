@@ -16,35 +16,18 @@ upload-data:
 	gsutil cp data/${LABEL_SET}/* gs://${GCS_BUCKET}/data/${LABEL_SET}/
 
 
-train-local-refine:
-	python -m image_segmentation.train \
-	    -d data/${LABEL_SET}/${LABEL_SET}_data.tfrecord \
-	    -l data/${LABEL_SET}/labels.txt \
-	    -n 10000 \
-	    -s 768 \
-	    -a 1 \
-	    --steps-per-epoch 100 \
-	    --batch-size 5 \
-	    --lr 0.0001 \
-            --fine-tune-checkpoint data/${LABEL_SET}/${LABEL_SET}_icnet_768x768_1_rf.h5 \
-	    -o data/${LABEL_SET}/${LABEL_SET}_icnet_768x768_1_rf.h5 \
-	    --refine
-
 train-local:
-	python -m image_segmentation.train \
-	    --data data/combined2.tfrecord \
-	    --use-dali \
-	    -l data/${LABEL_SET}/labels.txt \
-	    -n 500000 \
-	    -s 768 \
+	pipenv run python -m image_segmentation.train \
+	    --data gs://fritz-data-sandbox/ADEChallengeData2016/people/people_data.tfrecord \
+	    -l gs://fritz-data-sandbox/ADEChallengeData2016/people/labels.txt \
+	    -n 20 \
+	    -s 384 \
 	    -a 1 \
-	    --batch-size 12 \
-	    --steps-per-epoch 2500 \
+	    --batch-size 1 \
+	    --steps-per-epoch 10 \
 	    --parallel-calls 4 \
-	    --lr 0.0001 \
-	    --fine-tune-checkpoint data/${LABEL_SET}/${LABEL_SET}_icnet_768x768_1_fine.h5 \
-	    --add-noise \
-	    --model-name people_with_noise
+	    --lr 0.001 \
+	    --model-name people_local_test
 
 
 train-cloud:

@@ -3,7 +3,11 @@
 import argparse
 import keras
 import logging
+FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+logging.basicConfig(level=logging.INFO, format=FORMAT)
+
 import time
+import math
 import sys
 import struct
 import os
@@ -12,10 +16,17 @@ import tensorflow as tf
 from image_segmentation.icnet import ICNetModelFactory
 from image_segmentation.data_generator import ADE20KDatasetBuilder
 from image_segmentation import dali_config
-from google.cloud import storage
+from image_segmentation.image_segmentation_records import (
+    ImageSegmentationTFRecord
+)
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('train')
+import convert_to_coreml
+import convert_to_tfmobile
+from google.cloud import storage
+import fritz
+import fritz.train
+
+logger = logging.getLogger(__name__)
 
 
 def _summarize_arguments(args):
@@ -62,7 +73,7 @@ def _build_parser(argv):
         help='turn on image augmentation.'
     )
     parser.add_argument(
-        '--add-noise', action='store_true',
+        '--add-noise', type=float, default=0.0,
         help='Add gaussian noise to training.'
     )
     parser.add_argument(
@@ -82,12 +93,36 @@ def _build_parser(argv):
         '--lr', type=float, default=0.001, help='The learning rate.'
     )
     parser.add_argument(
+        '--lr-drop', type=float, default=None,
+        help='Ratio to drop learning rate on updates.'
+    )
+    parser.add_argument(
+        '--lr-initial-delay', type=int, default=0,
+        help='Initial number of epochs to wait before starting lr update.'
+    )
+    parser.add_argument(
+        '--lr-update-frequency', type=int, default=10,
+        help='How often to update learning rate (in epochs).'
+    )
+    parser.add_argument(
+        '--min-lr', type=float, default=0.0,
+        help='Min learning rate value if updating learning rate.'
+    )
+    parser.add_argument(
         '-n', '--num-steps', type=int, default=1000,
         help='Number of training steps to perform'
     )
     parser.add_argument(
         '--steps-per-epoch', type=int, default=100,
         help='Number of training steps to perform between model checkpoints'
+    )
+    parser.add_argument(
+        '--dataset-cycles', type=int, default=None,
+        help=(
+            'Number of times to iterate through dataset. Will calculate '
+            'number of steps and epoch size to make one epoch an entire '
+            'cycle through the dataset. For right now, only works with dali.'
+        )
     )
     parser.add_argument(
         '-o', '--output',
@@ -111,21 +146,18 @@ def _build_parser(argv):
         '--model-name', type=str, required=True,
         help='Short name separated by underscores'
     )
+    parser.add_argument(
+        '--start-time', type=int, default=int(time.time()),
+        help='Short name separated by underscores'
+    )
 
     return parser.parse_known_args()
 
 
-def _prepare_dataset(args, n_classes):
-    dataset = ADE20KDatasetBuilder.build(
-        args.data,
-        n_classes=n_classes,
-        batch_size=args.batch_size,
-        image_size=(args.image_size, args.image_size),
-        augment_images=False,
-        parallel_calls=args.parallel_calls,
-        prefetch=True,
-    )
-
+def _prepare_dataset(input_data, args, labels):
+    dataset = input_data.build_tf_dataset(labels, args.image_size,
+                                          args.batch_size,
+                                          args.parallel_calls)
     iterator = dataset.make_one_shot_iterator()
     example = iterator.get_next()
 
@@ -143,10 +175,13 @@ def build_tfindex_file(tfrecord_file, tfindex_file):
     Args:
         tfrecord_file: Path to TFRecord file.
         tfindex_file: output file to write to.
+
+    Returns: Number of records in tfrecord file.
     """
     tfrecord_fp = open(tfrecord_file, 'rb')
     idx_fp = open(tfindex_file, 'w')
 
+    total_records = 0
     while True:
         current = tfrecord_fp.tell()
         try:
@@ -163,12 +198,15 @@ def build_tfindex_file(tfrecord_file, tfindex_file):
             tfrecord_fp.read(4)
             idx_fp.write(str(current) + ' ' +
                          str(tfrecord_fp.tell() - current) + '\n')
+            total_records += 1
         except Exception:
             print("Not a valid TFRecord file")
             break
 
     tfrecord_fp.close()
     idx_fp.close()
+
+    return total_records
 
 
 def _prepare_dali(args, n_classes):
@@ -186,13 +224,13 @@ def _prepare_dali(args, n_classes):
     batch_size = args.batch_size
     image_size = args.image_size
     device_id = 0
+    storage_client = storage.Client()
     filenames = []
 
     for filename in args.data:
         if filename.startswith('gs://'):
             parts = filename[5:].split('/')
             bucket_name, blob_name = parts[0], '/'.join(parts[1:])
-            storage_client = storage.Client()
             bucket = storage_client.get_bucket(bucket_name)
             blob = bucket.blob(blob_name)
             download_filename = os.path.basename(blob_name)
@@ -202,10 +240,11 @@ def _prepare_dali(args, n_classes):
             filenames.append(filename)
 
     tfindex_files = args.tfindex_files or []
+    total_records = 0
     if not tfindex_files:
         for path in filenames:
             tfindex_file = path.split('.')[0] + '.tfindex'
-            build_tfindex_file(path, tfindex_file)
+            total_records += build_tfindex_file(path, tfindex_file)
             logger.info('Created tfindex file: {input} -> {output}'.format(
                 input=path,
                 output=tfindex_file
@@ -250,7 +289,37 @@ def _prepare_dali(args, n_classes):
         'mask_4': mask_4,
         'mask_8': mask_8,
         'mask_16': mask_16,
+        'total_records': total_records,
     }
+
+
+def build_fritz_callback(output_file: str, **kwargs):
+    """Builds converters and fritz callback.
+
+    Args:
+        output_file: name of output keras file.
+        kwargs: additional keyword arguments to pass to Callback.
+
+    Returns: fritz.train.FritzSnapshotCallback
+    """
+    fritz.configure()
+
+    model_ids = {}
+    converters = {
+        fritz.frameworks.CORE_ML: convert_to_coreml.convert_from_keras,
+        fritz.frameworks.TENSORFLOW_MOBILE: (
+            lambda model: convert_to_tfmobile.convert_from_keras(
+                model, os.path.basename(output_file), '.'
+            )
+        )
+    }
+
+    return fritz.train.FritzSnapshotCallback(
+        output_file_name=output_file,
+        converters_by_framework=converters,
+        model_uids_by_framework=model_ids,
+        **kwargs
+    )
 
 
 def train(argv):
@@ -261,26 +330,27 @@ def train(argv):
 
     class_labels = ADE20KDatasetBuilder.load_class_labels(
         args.label_filename)
+
+    logger.info('Labels:')
+    for label in class_labels:
+        logger.info('\t' + label)
+
     if args.list_labels:
-        logger.info('Labels:')
-        labels = ''
-        for label in class_labels:
-            labels += '%s\n' % label
-        logger.info(labels)
         sys.exit()
 
     n_classes = len(class_labels)
+    dataset = ImageSegmentationTFRecord(args.data)
 
     if args.use_dali:
         data = _prepare_dali(args, n_classes)
     else:
-        data = _prepare_dataset(args, n_classes)
+        data = _prepare_dataset(dataset, args, class_labels)
 
     if args.add_noise:
         logger.info('Adding gaussian noise to input tensor.')
         noise = tf.random_normal(shape=tf.shape(data['input']),
                                  mean=0.0,
-                                 stddev=0.07,
+                                 stddev=args.add_noise,
                                  dtype=tf.float32)
         data['input'] = data['input'] + noise
 
@@ -331,14 +401,26 @@ def train(argv):
             model_name=args.model_name,
             size=args.image_size,
             alpha=str(args.alpha).replace('0', '').replace('.', ''),
-            time=int(time.time())
+            time=args.start_time,
         )
     else:
         filename = args.output
 
-    print("=======================")
-    print("Output file name: {name}".format(name=filename))
-    print("=======================")
+    logger.info(f"Output file name: {filename}")
+
+    def step_decay(epoch):
+        initial_lrate = args.lr
+        if epoch < args.lr_initial_delay:
+            return initial_lrate
+
+        drop = args.lr_drop
+        epochs_drop = args.lr_update_frequency
+        epoch = epoch - args.lr_initial_delay
+
+        learning_rate = initial_lrate * (
+            math.pow(drop, math.floor((1 + epoch) / epochs_drop))
+        )
+        return learning_rate if learning_rate > args.min_lr else args.min_lr
 
     callbacks = [
         keras.callbacks.ModelCheckpoint(
@@ -349,12 +431,32 @@ def train(argv):
         ),
     ]
 
+    if args.lr_drop:
+        callbacks.append(keras.callbacks.LearningRateScheduler(step_decay))
+
     if args.gcs_bucket:
         callbacks.append(SaveCheckpointToGCS(filename, args.gcs_bucket))
 
+    output_filename = os.path.join(args.gcs_bucket or os.path.curdir, filename)
+    fritz_callback = build_fritz_callback(output_filename)
+    callbacks.append(fritz_callback)
+
+    steps_per_epoch = args.steps_per_epoch
+    epochs = int(args.num_steps / args.steps_per_epoch) + 1
+
+    # Can only calculate total records on dali data for now because we iterate
+    # through tfrecord files to build tfindex file.
+    if args.use_dali and args.dataset_cycles:
+        steps_per_epoch = int(
+            math.ceil(data['total_records'] / args.batch_size)
+        )
+        epochs = int(args.dataset_cycles)
+        logger.info('Training model on %s records.', data['total_records'])
+        logger.info('Will be %s steps per epoch.', steps_per_epoch)
+
     model.fit(
-        steps_per_epoch=args.steps_per_epoch,
-        epochs=int(args.num_steps / args.steps_per_epoch) + 1,
+        steps_per_epoch=steps_per_epoch,
+        epochs=epochs,
         callbacks=callbacks,
     )
 

@@ -1,10 +1,24 @@
 import argparse
 import sys
 
-import coremltools
 import keras
 
 from image_segmentation.icnet import ICNetModelFactory
+
+
+def convert_from_keras(model):
+    import coremltools
+
+    return coremltools.converters.keras.convert(
+        model,
+        input_names='image',
+        image_input_names='image',
+        image_scale=2.0 / 255.0,
+        red_bias=-1.0,
+        green_bias=-1.0,
+        blue_bias=-1.0,
+        output_names='output'
+    )
 
 
 def convert(argv):
@@ -36,18 +50,7 @@ def convert(argv):
         weights_path=args.keras_checkpoint,
         train=False
     )
-
-    mlmodel = coremltools.converters.keras.convert(
-        keras_model,
-        input_names='image',
-        image_input_names='image',
-        image_scale=2.0 / 255.0,
-        red_bias=-1.0,
-        green_bias=-1.0,
-        blue_bias=-1.0,
-        output_names='output'
-    )
-
+    mlmodel = convert_from_keras(keras_model)
     mlmodel.save(args.mlmodel_output)
 
 

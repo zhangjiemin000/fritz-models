@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+tensorflow = "*"
+fritz = {path = "../../fritz-python-private",editable = true,extras = ["train"]}
+google-cloud-storage = "*"
+coremltools = {editable = true,git = "https://github.com/ghop02/coremltools.git",ref = "upadted-keras-bilinear-sampling"}
+
+[requires]
+python_version = "3.6"

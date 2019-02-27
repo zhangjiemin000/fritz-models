@@ -5,7 +5,6 @@ import sys
 
 import keras
 import tensorflow as tf
-from tensorflow.python.platform import gfile
 from tensorflow.python.tools import freeze_graph
 from tensorflow.python.tools import optimize_for_inference_lib
 from tensorflow.python.framework import dtypes
@@ -71,12 +70,19 @@ def _optimize_graph(basename, output_dir):
     tf.train.write_graph(
         optimized_graph, output_dir, optimized_graph_filename, as_text=False
     )
-    logger.info('Saved optimized graph to: %s' %
-                os.path.join(output_dir, optimized_graph_filename))
+    output_path = os.path.join(output_dir, optimized_graph_filename)
+    logger.info(f'Saved optimized graph to: {output_path}')
+    return output_path
+
+
+def convert_from_keras(keras_model, basename, output_dir):
+    _freeze_graph(keras_model, basename, output_dir)
+    output_path = _optimize_graph(basename, output_dir)
+
+    return open(output_path, 'rb').read()
 
 
 def main(argv):
-
     parser = argparse.ArgumentParser(
         description='Converts an image segmentation model to TF Mobile'
     )
