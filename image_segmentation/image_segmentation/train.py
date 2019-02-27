@@ -447,7 +447,7 @@ def train(argv):
             args.gcs_bucket or os.path.curdir,
             filename
         )
-        fritz_callback = build_fritz_callback(output_filename, period=30)
+        fritz_callback = build_fritz_callback(output_filename, period=10)
         callbacks.append(fritz_callback)
 
     steps_per_epoch = args.steps_per_epoch
