@@ -150,6 +150,10 @@ def _build_parser(argv):
         '--start-time', type=int, default=int(time.time()),
         help='Short name separated by underscores'
     )
+    parser.add_argument(
+        '--upload-to-fritz', action='store_true',
+        help='if specified, uploads models to fritz'
+    )
 
     return parser.parse_known_args()
 
@@ -437,9 +441,13 @@ def train(argv):
     if args.gcs_bucket:
         callbacks.append(SaveCheckpointToGCS(filename, args.gcs_bucket))
 
-    output_filename = os.path.join(args.gcs_bucket or os.path.curdir, filename)
-    fritz_callback = build_fritz_callback(output_filename)
-    callbacks.append(fritz_callback)
+    if args.upload_to_fritz:
+        output_filename = os.path.join(
+            args.gcs_bucket or os.path.curdir,
+            filename
+        )
+        fritz_callback = build_fritz_callback(output_filename)
+        callbacks.append(fritz_callback)
 
     steps_per_epoch = args.steps_per_epoch
     epochs = int(args.num_steps / args.steps_per_epoch) + 1

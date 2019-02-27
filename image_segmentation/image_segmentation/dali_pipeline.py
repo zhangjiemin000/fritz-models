@@ -93,6 +93,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         self.coin = ops.CoinFlip(probability=0.5)
         self.rotate_rng = ops.Uniform(range=(config.rotate_angle_min,
                                              config.rotate_angle_max))
+        print(config.crop_x_max, config.crop_y_max)
         self.crop_x_rng = ops.Uniform(range=(0.0, config.crop_x_max))
         self.crop_y_rng = ops.Uniform(range=(0.0, config.crop_y_max))
         self.hue_rng = ops.Uniform(range=(config.hue_min,
@@ -121,7 +122,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         images = images.gpu()
         images = self.resize_large(images)
         images = self.rotate(images, angle=angle)
-        # images = self.crop(images, crop_pos_x=crop_x, crop_pos_y=crop_y)
+        images = self.crop(images, crop_pos_x=crop_x, crop_pos_y=crop_y)
         images = self.resize(images)
         images = self.color_twist(images,
                                   brightness=brightness,
@@ -134,7 +135,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         masks = masks.gpu()
         masks = self.resize_large(masks)
         masks = self.rotate(masks, angle=angle)
-        # masks = self.crop(masks, crop_pos_x=crop_x, crop_pos_y=crop_y)
+        masks = self.crop(masks, crop_pos_x=crop_x, crop_pos_y=crop_y)
         masks = self.resize(masks)
         masks = self.flip(masks, horizontal=coin)
 
