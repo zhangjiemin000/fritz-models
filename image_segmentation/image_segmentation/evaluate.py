@@ -2,7 +2,7 @@ import keras
 from image_segmentation.image_segmentation_records import (
     ImageSegmentationTFRecord
 )
-
+from image_segmentation.icnet import ICNetModelFactory
 from matplotlib import pyplot
 import skimage.filters
 import numpy
@@ -13,10 +13,21 @@ class EvaluateImageSegmentationModel(object):
 
     def __init__(self,
                  trained_model_path,
-                 tfrecord_path):
-        self.model = keras.models.load_model(trained_model_path)
+                 tfrecord_path,
+                 alpha=1.0):
+
+        model = keras.models.load_model(trained_model_path)
+        self.input_shape = model.inputs[0].shape.as_list()[1:3]
+        num_classes = model.outputs[0].shape.as_list()[-1]
+        self.model = ICNetModelFactory.build(
+            self.input_shape[0],
+            num_classes,
+            alpha=alpha,
+            train=False,
+            weights_path=trained_model_path,
+        )
+
         self.tfrecords = ImageSegmentationTFRecord(tfrecord_path)
-        self.input_shape = self.model.inputs[0].shape.as_list()[1:3]
 
     def run_prediction(self, record):
         image = record['image']

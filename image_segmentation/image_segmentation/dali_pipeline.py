@@ -94,7 +94,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         self.rotate_rng = ops.Uniform(range=(config.rotate_angle_min,
                                              config.rotate_angle_max))
         print(config.crop_x_max, config.crop_y_max)
-        self.crop_x_rng = ops.Uniform(range=(0.0, config.crop_x_max))
+        self.crop_x_rng = ops.Uniform(range=(0.5, config.crop_x_max))
         self.crop_y_rng = ops.Uniform(range=(0.0, config.crop_y_max))
         self.hue_rng = ops.Uniform(range=(config.hue_min,
                                           config.hue_max))
