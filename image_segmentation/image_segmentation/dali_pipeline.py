@@ -74,7 +74,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
             mean=122.5,
             std=255.0
         )
-
+        print(image_size)
         self.crop = ops.Crop(
             device="gpu",
             crop=image_size,
@@ -115,8 +115,8 @@ class CommonPipeline(dali.pipeline.Pipeline):
         contrast = self.contrast_rng()
         saturation = self.saturation_rng()
         brightness = self.brightness_rng()
-        crop_x = self.crop_x_rng()
-        crop_y = self.crop_y_rng()
+        # crop_x = self.crop_x_rng()
+        # crop_y = self.crop_y_rng()
         images = self.decode(inputs["image/encoded"])
         images = images.gpu()
         images = self.resize_large(images)
