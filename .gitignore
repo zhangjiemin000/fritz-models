@@ -176,3 +176,10 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Excluding any model train data
+*.h5
+*.ckpt*
+*.pb
+*.pbtext
+checkpoint

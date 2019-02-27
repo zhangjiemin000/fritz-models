@@ -374,17 +374,17 @@ def train(argv):
         gpu_icnet.__setattr__('callback_model', icnet)
         model = gpu_icnet
     else:
-        with tf.device('/GPU:0'):
-            model = ICNetModelFactory.build(
-                args.image_size,
-                n_classes,
-                weights_path=args.fine_tune_checkpoint,
-                train=True,
-                input_tensor=data['input'],
-                alpha=args.alpha,
-            )
+        model = ICNetModelFactory.build(
+            args.image_size,
+            n_classes,
+            weights_path=args.fine_tune_checkpoint,
+            train=True,
+            input_tensor=data['input'],
+            alpha=args.alpha,
+        )
 
     optimizer = keras.optimizers.Adam(lr=args.lr)
+
     model.compile(
         optimizer,
         loss=keras.losses.categorical_crossentropy,
