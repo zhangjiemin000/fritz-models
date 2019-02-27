@@ -310,11 +310,11 @@ def build_fritz_callback(output_file: str, **kwargs):
     model_ids = {}
     converters = {
         fritz.frameworks.CORE_ML: convert_to_coreml.convert_from_keras,
-        fritz.frameworks.TENSORFLOW_MOBILE: (
-            lambda model: convert_to_tfmobile.convert_from_keras(
-                model, os.path.basename(output_file), '.'
-            )
-        )
+        # fritz.frameworks.TENSORFLOW_MOBILE: (
+        #     lambda model: convert_to_tfmobile.convert_from_keras(
+        #         model, os.path.basename(output_file), '.'
+        #     )
+        # )
     }
 
     return fritz.train.FritzSnapshotCallback(
