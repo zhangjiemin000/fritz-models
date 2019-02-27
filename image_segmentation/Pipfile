@@ -9,11 +9,14 @@ verify_ssl = true
 name = "nvidia"
 
 [packages]
-tensorflow-gpu = "*"
 fritz = "==1.0.0b3"
 google-cloud-storage = "*"
 coremltools = {editable = true,git = "https://github.com/ghop02/coremltools.git",ref = "upadted-keras-bilinear-sampling"}
 nvidia-dali-tf-plugin = "*"
+
+[dev]
+tensorflow = "*"
+
 
 [requires]
 python_version = "3.6"
