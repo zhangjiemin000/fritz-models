@@ -121,7 +121,7 @@ class CommonPipeline(dali.pipeline.Pipeline):
         images = images.gpu()
         images = self.resize_large(images)
         images = self.rotate(images, angle=angle)
-        images = self.crop(images, crop_pos_x=crop_x, crop_pos_y=crop_y)
+        # images = self.crop(images, crop_pos_x=crop_x, crop_pos_y=crop_y)
         images = self.resize(images)
         images = self.color_twist(images,
                                   brightness=brightness,
