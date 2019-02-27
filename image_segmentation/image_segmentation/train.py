@@ -271,8 +271,8 @@ def _prepare_dali(args, n_classes):
     with tf.device('/gpu:0'):
         results = daliop(
             serialized_pipeline=pipe.serialize(),
-            shape=[args.batch_size, args.image_size, args.image_size, 3],
-            label_type=tf.int64,
+            shapes=[(args.batch_size, args.image_size, args.image_size, 3), ()],
+            dtypes=[tf.int64, tf.int64],
         )
 
     input_tensor = results.batch
