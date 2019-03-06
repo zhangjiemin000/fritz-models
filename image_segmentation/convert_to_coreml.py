@@ -41,10 +41,10 @@ def convert(argv):
         keras_model,
         input_names='image',
         image_input_names='image',
-        image_scale=2.0 / 255.0,
-        red_bias=-1.0,
-        green_bias=-1.0,
-        blue_bias=-1.0,
+        image_scale=1.0 / 255.0,
+        red_bias=-0.5,
+        green_bias=-0.5,
+        blue_bias=-0.5,
         output_names='output'
     )
 
