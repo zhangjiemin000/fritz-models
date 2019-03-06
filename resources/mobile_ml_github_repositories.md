@@ -5,7 +5,7 @@ The following tables include repos with machine learning models ready for mobile
 ## Object Detection
 
 Name | Last Updated | Stars | Provided Description
------ | ----- | --- | -----
+----- | ----- | ---: | -----
 [flutter_realtime_detection](https://github.com/shaqian/flutter_realtime_detection) | 2019-02-25 | 46 | Real-time detection demo for Flutter tflite plugin
 [webcam-detect-tflite](https://github.com/mattn/webcam-detect-tflite) | 2019-02-25 | 4	
 [Nanodegree-Machine-Learning](https://github.com/huyvnphan/Nanodegree-Machine-Learning) | 2019-03-01 | 1 | My projects for Machine Learning Nanodegree
@@ -24,7 +24,7 @@ Name | Last Updated | Stars | Provided Description
 ## Pose Estimation
 
 Name | Last Updated | Stars | Provided Description
------ | ----- | --- | -----
+----- | ----- | ---: | -----
 [PoseEstimation-MLKit](https://github.com/tucan9389/PoseEstimation-MLKit) | 2019-02-20 | 5 | The example of running Pose Estimation using ML Kit
 [Body-Pose-Estimation-Android-gpu](https://github.com/dongseokYang/Body-Pose-Estimation-Android-gpu) | 2019-01-25 | 4 | Body Pose Estimation (Android gpu)
 [FaceConverter](https://github.com/taylorlu/FaceConverter) | 2019-02-23 | 2 | Face swap and 3D alignment from a single image based on PRNet
@@ -47,7 +47,7 @@ Name | Last Updated | Stars | Provided Description
 ## Style Transfer
 
 Name | Last Updated | Stars | Provided Description
------ | ----- | --- | -----
+----- | ----- | ---: | -----
 [phixer](https://github.com/nateemma/phixer) | 2019-02-16 | 1 | iOS App to apply filters to photos or camera feed. Some editing features
 [CoreMLStyleTransferDemo](https://github.com/BeiXiao/CoreMLStyleTransferDemo) | 2019-02-15 | 1 | CoreMLStyleTransferDemo
 [StyleTransfer](https://github.com/skafos/StyleTransfer) | 2019-02-28 | 0 | Example iOS App using StyleTransfer MLModel
@@ -55,7 +55,7 @@ Name | Last Updated | Stars | Provided Description
 ## Text Classification
 
 Name | Last Updated | Stars | Provided Description
------ | ----- | --- | -----
+----- | ----- | ---: | -----
 [TextClassification](https://github.com/skafos/TextClassification) | 2019-02-28 | 1 | Example Text Classification iOS App
 [Microsoft-Imagine-Cup](https://github.com/saranshmanu/Microsoft-Imagine-Cup) | 2019-02-16 | 1 | This repository contains the project we created for Microsoft Imagine Cup 2019 and HackHarvard 2018 about our idea of Augmented Reality to Grocery Stores
 [Twittermenti](https://github.com/MohamedAbdallah-14/Twittermenti) | 2019-02-24 | 0	
@@ -68,7 +68,7 @@ Name | Last Updated | Stars | Provided Description
 ## Image Labeling
 
 Name | Last Updated | Stars | Provided Description
------ | ----- | --- | -----
+----- | ----- | ---: | -----
 [visual-recognition-coreml](https://github.com/watson-developer-cloud/visual-recognition-coreml) | 2019-02-20 | 449 | Classify images offline using Watson Visual Recognition and Core ML
 [flutter_tflite](https://github.com/shaqian/flutter_tflite) | 2019-02-17 | 67 | Flutter plugin for TensorFlow Lite
 [PhotoAssessment](https://github.com/yulingtianxia/PhotoAssessment)	| 2019-02-27 | 12 | Photo Assessment using Core ML and Metal.
