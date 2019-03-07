@@ -22,6 +22,7 @@ If you'd like to incorporate any of these models or versions you've trained into
 
 Additional, [non-code resources](resources/README.md) for machine learning and AI.
 
+* [[Mobile ML GitHub Repositories](resources/mobile_ml_github_repositories.md): A list of repos with machine learning models ready for mobile, organized by feature type.
 * [AI and ML Landscape](resources/AI_Landscape.md): Our curated list of helpful products and services for AI and machine learning.
 * [AI and ML Newsletters](resources/AI_ML_Newsletters.md): A list of relevant newsletters in AI and machine learning.
 * [Mobile Development Newsletters](resources/Mobile_Newsletters.md): A list of relevant newsletters in iOS, Android, React Native, and Cross Platform development.
