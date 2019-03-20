@@ -92,7 +92,7 @@ Name | Last Updated | Stars | Provided Description
 [Twittermenti](https://github.com/MrRadi6/Twittermenti) | 2019-02-21 |    
 [Twitter-AI-Anlyzr](https://github.com/NFestoso/Twitter-AI-Anlyzr) | 2019-02-21  | | Use Apple's CreateML AI model to analys the emotional sum of a specified Twitter handle or hashtag.
 [Twittermenti](https://github.com/aymscherrer/Twittermenti) | 2019-02-18 | | This application uses CoreML 2 to recognize the emotion behind the last 100 tweets for a specific topic using Twitter's APIs. The result of the text recognition is shown to the user using an emoji.
-[tutorial-projects](https://github.com/Philosocode/tutorial-projects)   | 2019-02-14 | | Tutorial projects from Udemy, YouTube, and other sources.
+[tutorial-projects](https://github.com/Philosocode/tutorial-projects) | 2019-02-14 | | Tutorial projects from Udemy, YouTube, and other sources.
 [training_Twittermenti](https://github.com/meetjoy/training_Twittermenti) | 2019-01-26 | 	
 [TwitterSentimentAnalysis](https://github.com/aritropaul/TwitterSentimentAnalysis) | 2019-01-05 | |	Real Quick Twitter Sentiment Analysis using CoreML and CreateML
 [tflite-inference-code-for-lstm](https://github.com/youyou22222/tflite-inference-code-for-lstm) | 2019-02-13 | | A library written in c++ for running lstm tensorflow lite model on mobile devices
@@ -114,7 +114,7 @@ Name | Last Updated | Stars | Provided Description
 [PhotoAssessment](https://github.com/yulingtianxia/PhotoAssessment) | 2019-02-27 | 12 | Photo Assessment using Core ML and Metal.
 [CustomVisionCompanion](https://github.com/DotNetToscana/CustomVisionCompanion) | 2019-01-27 | 12 | A Xamarin.Forms app showcasing how to use Custom Vision Service with either online and offline models.
 [TFLite-MnistDemo](https://github.com/fengzhizi715/TFLite-MnistDemo) | 2018-12-31 |	11 |
-[tflite-react-native]	https://github.com/shaqian/tflite-react-native	2019-02-10 | 9 | React Native library for TensorFlow Lite
+[tflite-react-native](https://github.com/shaqian/tflite-react-native) | 2019-02-10 | 9 | React Native library for TensorFlow Lite
 [NsfwDetector](https://github.com/kashif/NsfwDetector) | 2019-02-06 | 8 | Yahoo's Open NSFW detector with Core ML
 [deep-learning](https://github.com/margaretmz/deep-learning) | 2019-02-25 | 7 | Deep learning with TensorFlow and Keras.
 [tflite-rs](https://github.com/boncheolgu/tflite-rs) | 2019-01-29 | 6	
@@ -150,7 +150,7 @@ Name | Last Updated | Stars | Provided Description
 [CoreMLDemo](https://github.com/vikash213/CoreMLDemo) | 2019-01-04 | 1 | this application is about implementation of coreML framework where train and test data helps to recognise the picture after train datasets get trained and verifying it through test datasets.
 [CoreML](https://github.com/wooky83/CoreML) | 2019-01-02 | 1 | iOS Machine learning with CoreML
 [ssdLiteForAndorid](https://github.com/CodeLpea/ssdLiteForAndorid) |	2019-01-17 | 1  | ssdlite模型在安卓中运行
-[MyFoodle](https://github.com/shramankar/MyFoodle) |    2019-02-21  | | Foodle Project - Swift 5 Xcode 10.2 App to help donate and locate food
+[MyFoodle](https://github.com/shramankar/MyFoodle) |  2019-02-21  | | Foodle Project - Swift 5 Xcode 10.2 App to help donate and locate food
 [Greetings](https://github.com/InnaLabynskaya/Greetings) | 2019-02-26 |   
 [Android](https://github.com/JonasStankevicius/Android) |   2019-03-01 |  
 [RecycleSmartApp](https://github.com/Hacker719/RecycleSmartApp) | 2019-02-28 |    
@@ -290,7 +290,7 @@ Name | Last Updated | Stars | Provided Description
 [CoreMLApp](https://github.com/mehmetcanseyhan/CoreMLApp) | 2019-01-28 | | Core ML kullanarak. Resimden tanıma ve oranlama
 [Dropit-Assignment](https://github.com/ultravibez/Dropit-Assignment) | 2019-01-27 |	
 [SeeFoodCoreML](https://github.com/BananaViking/SeeFoodCoreML) | 2019-01-26 | | Rewrite of the SeeFood app using CoreML and Vision.
-[food](https://github.com/ryannazari/food	2019-01-25) | |	Using CoreML to recognize images
+[food](https://github.com/ryannazari/food) | 2019-01-25 | |	Using CoreML to recognize images
 [tum_huawai](https://github.com/tjhannes/tum_huawai) | 2019-01-25	|
 [watson-classify-train](https://github.com/bourdakos1/watson-classify-train) | 2019-01-24 |	|	Train and classify images with Watson Visual Recognition
 [iOS-development](https://github.com/rssr25/iOS-development) | 2019-01-24 | |	Learning iOS development
