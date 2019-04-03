@@ -84,7 +84,7 @@ The AI and Machine Learning landscape is rapidly changing. We welcome additions 
 
 * [Datmo](https://datmo.com/) - Workflow tools to help you experiment, deploy, and scale AI solutions
 
-* [Iterative AI](https://iterative.ai/) - CI workflow for machine learning projects
+* [DVC.org](https://dvc.org/) - Open-source Version Control System for Machine Learning Projects
 
 * [MLFlow](https://mlflow.org/) - Open source ML lifecycle platform
 
