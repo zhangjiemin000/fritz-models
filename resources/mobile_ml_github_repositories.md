@@ -17,7 +17,6 @@ Name | Last Updated | Stars | Description
 [gleam-ios](https://github.com/akarataev/gleam-ios) | 2019-01-15 | 16 | Gleam iOS client for VK Hackathon 2018
 [CustomVisionCompanion](https://github.com/DotNetToscana/CustomVisionCompanion) | 2019-01-27 | 14 | A Xamarin.Forms app showcasing how to use Custom Vision Service with either online and offline models.
 [tflite-react-native](https://github.com/shaqian/tflite-react-native) | 2019-03-17 | 13 | React Native library for TensorFlow Lite
-[BBCGestureRecognizer](https://github.com/MortyMerr/BBCGestureRecognizer) | 2019-02-21 | 8 | Elegant custom recognizer to track user draw big black cock on screen. CoreML & Vision
 [NsfwDetector](https://github.com/kashif/NsfwDetector) | 2019-02-06 | 8 | Yahoo's Open NSFW detector with Core ML
 [glDelegateBench](https://github.com/freedomtan/glDelegateBench) | 2019-03-31 | 7 | quick and dirty inference time benchmark for TFLite gles delegate
 [deep-learning](https://github.com/margaretmz/deep-learning) | 2019-02-25 | 7 | Deep learning with TensorFlow and Keras.
