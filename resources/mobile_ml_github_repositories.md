@@ -1,6 +1,6 @@
 # Featured Repos
 
-The following tables include repos with machine learning models ready for mobile, organized by feature type. This list will be regualrly updated.
+The following tables include repos with machine learning models ready for mobile, organized by feature type. This list will be regualry updated.
 
 ## Image Classification
 
@@ -8,14 +8,14 @@ Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
 [Paparazzo](https://github.com/avito-tech/Paparazzo) | 2019-02-07 | 636 | Custom iOS camera and photo picker with editing capabilities
 [visual-recognition-coreml](https://github.com/watson-developer-cloud/visual-recognition-coreml) | 2019-02-20 | 457 | Classify images offline using Watson Visual Recognition and Core ML
-[flutter_tflite](https://github.com/shaqian/flutter_tflite) | 2019-04-01 | 89 | Flutter plugin for TensorFlow Lite
-[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 85 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
-[CarLens-iOS](https://github.com/netguru/CarLens-iOS) | 2019-03-22 | 34 | CarLens - Recognize and Collect Cars
-[PhotoAssessment](https://github.com/yulingtianxia/PhotoAssessment) | 2019-03-03 | 20 | Photo Assessment using Core ML and Metal.
+[flutter_tflite](https://github.com/shaqian/flutter_tflite) | 2019-04-07 | 94 | Flutter plugin for TensorFlow Lite
+[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 88 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
+[CarLens-iOS](https://github.com/netguru/CarLens-iOS) | 2019-03-22 | 35 | CarLens - Recognize and Collect Cars
+[PhotoAssessment](https://github.com/yulingtianxia/PhotoAssessment) | 2019-03-03 | 22 | Photo Assessment using Core ML and Metal.
 [GuessMyDrawing-ios](https://github.com/hetelek/GuessMyDrawing-ios) | 2019-02-12 | 17 | Custom mlmodel trained on Google's quick draw data set.
-[MNIST-TFLite](https://github.com/frogermcs/MNIST-TFLite) | 2019-02-01 | 16 | MNIST classifier built for TensorFlow Lite - Android, iOS and other "lite" platforms
+[MNIST-TFLite](https://github.com/frogermcs/MNIST-TFLite) | 2019-02-01 | 17 | MNIST classifier built for TensorFlow Lite - Android, iOS and other "lite" platforms
 [gleam-ios](https://github.com/akarataev/gleam-ios) | 2019-01-15 | 16 | Gleam iOS client for VK Hackathon 2018
-[CustomVisionCompanion](https://github.com/DotNetToscana/CustomVisionCompanion) | 2019-01-27 | 14 | A Xamarin.Forms app showcasing how to use Custom Vision Service with either online and offline models.
+[CustomVisionCompanion](https://github.com/DotNetToscana/CustomVisionCompanion) | 2019-01-27 | 15 | A Xamarin.Forms app showcasing how to use Custom Vision Service with either online and offline models.
 [tflite-react-native](https://github.com/shaqian/tflite-react-native) | 2019-03-17 | 13 | React Native library for TensorFlow Lite
 [NsfwDetector](https://github.com/kashif/NsfwDetector) | 2019-02-06 | 8 | Yahoo's Open NSFW detector with Core ML
 [glDelegateBench](https://github.com/freedomtan/glDelegateBench) | 2019-03-31 | 7 | quick and dirty inference time benchmark for TFLite gles delegate
@@ -30,6 +30,7 @@ Name | Last Updated | Stars | Description
 [Smart-Reminder](https://github.com/mufasaYC/Smart-Reminder) | 2019-02-03 | 3 | A lightweight reminder app
 [Dynamic-Day-Night-Anime-Wallpaper](https://github.com/msztech/Dynamic-Day-Night-Anime-Wallpaper) | 2019-01-26 | 3 | With Core ML, you can display your favorite anime wallpapers according to the time of the day automatically on your Mac. The machine learning will automatically recognize the daylight condition of the image, and change your wallpaper accordingly at different times of a day. (Non-major project)
 [FlowerRecognition](https://github.com/cswangyuhui/FlowerRecognition) | 2019-01-15 | 3 | 基于TensorFlow Lite物体识别安卓APP的设计与实现
+[Android-ML-](https://github.com/pranayanand123/Android-ML-) | 2019-01-02 | 3 | Built a machine learning model from scratch using Keras. Then deployed to android for real time application.
 [Tflite_on_Android](https://github.com/jeongheetaek/Tflite_on_Android) | 2019-02-26 | 2 |
 [Greetings](https://github.com/InnaLabynskaya/Greetings) | 2019-02-26 | 2 |
 [AnimalClassifier-Swift-Playground](https://github.com/DocRace/AnimalClassifier-Swift-Playground) | 2019-02-14 | 2 | All for Swift Playgrounds!. Use Create ML to Train Model and Core ML to recognize animal species in Swift Playground on iPad.  完全在 Swift Playgrounds 实现的工程！使用 Create ML 框架训练机器学习模型，Core ML 框架使用模型在 iOS Playground 环境中让 iPad 来识别动物种类！
@@ -37,9 +38,9 @@ Name | Last Updated | Stars | Description
 [cameraML](https://github.com/km1230/cameraML) | 2019-02-04 | 2 | A simple iOS application for object identification with CoreML
 [CocoaheadsMtp-ML-Apple-Pokedex](https://github.com/davidy4ng/CocoaheadsMtp-ML-Apple-Pokedex) | 2019-01-22 | 2 | The sources and keynote slides for my talk at Cocoaheads Montpellier, France (Jan 17th, 2019)
 [Learning-ios-and-Swift-Course](https://github.com/geoo993/Learning-ios-and-Swift-Course) | 2019-01-14 | 2 |
-[Android-ML-](https://github.com/pranayanand123/Android-ML-) | 2019-01-02 | 2 | From a scratch Machine Learning model built using Keras to full implementation on android devices.
+[IntSys-Seedling](https://github.com/CornellDataScience/IntSys-Seedling) | 2019-04-08 | 1 | 🌱mobile application to classify seedlings 🌱
+[DeepCamera_Android](https://github.com/SharpAI/DeepCamera_Android) | 2019-04-05 | 1 | Run DeepCamera on Android.
 [ThirdPracticeBucket](https://github.com/dlee67/ThirdPracticeBucket) | 2019-03-28 | 1 | Git was telling me loose object was corrupt in the SecondBucket?
-[IntSys-Seedling](https://github.com/CornellDataScience/IntSys-Seedling) | 2019-03-26 | 1 | 🌱mobile application to classify seedlings 🌱
 [explorer](https://github.com/AK-ayush/explorer) | 2019-03-25 | 1 |
 [WhatsApple-iOS](https://github.com/gg2001/WhatsApple-iOS) | 2019-03-24 | 1 | iOS app version of WhatsApple
 [UniY3-MobileApplicationsDevelopment](https://github.com/elliotleelewis/UniY3-MobileApplicationsDevelopment) | 2019-03-22 | 1 | My work for my third year "Mobile Applications Development" module.
@@ -48,6 +49,7 @@ Name | Last Updated | Stars | Description
 [CataractDetectionApp-UsingCNN-NeuralNetwork](https://github.com/KrishnaRauniyar/CataractDetectionApp-UsingCNN-NeuralNetwork) | 2019-02-25 | 1 |
 [SeeFood](https://github.com/giuliaboscaro/SeeFood) | 2019-02-24 | 1 | An iOS app that identifies food
 [TrashBot](https://github.com/AaronRdm/TrashBot) | 2019-02-23 | 1 | This is a Science Research Project done by: Aaron Gabrielle C. Dichoso, Conrad Amadeus Carmelo C. Ubay, Jonathan Miguel L. Dela Cruz, and Angelo Arellano Ronquillo
+[10_08_okushirokentaro](https://github.com/okushiro/10_08_okushirokentaro) | 2019-02-21 | 1 |
 [coreml-ios-droni](https://github.com/gweltaz-calori/coreml-ios-droni) | 2019-02-19 | 1 |
 [CoreMlLeakTest](https://github.com/SoylentGraham/CoreMlLeakTest) | 2019-02-11 | 1 | CoreML is leaking. Minimal reproduction case for StackOverflow: https://stackoverflow.com/questions/54634112/minimal-coreml-prediction-leaking-memory/
 [ios-meme-classifier](https://github.com/julianpomper/ios-meme-classifier) | 2019-01-28 | 1 | A with 'CreateML' generated Meme-Classifier, to identify different types of memes
@@ -60,10 +62,11 @@ Name | Last Updated | Stars | Description
 [iPrediction](https://github.com/jlheriniaina/iPrediction) | 2019-01-13 | 1 |
 [coreML-exapmples](https://github.com/Valter4578/coreML-exapmples) | 2019-01-04 | 1 |
 [CoreML](https://github.com/wooky83/CoreML) | 2019-01-02 | 1 | iOS Machine learning with CoreML
+[RecipleaseV1](https://github.com/vincentBoulanger/RecipleaseV1) | 2019-04-08 | 0 |
+[iOS](https://github.com/JB184351/iOS) | 2019-04-05 | 0 | App Helps users to find bowling locations and reserve and/or get directions
+[ARObjectDetection](https://github.com/7haz/ARObjectDetection) | 2019-04-04 | 0 | Detecting cars part using CoreML and Vision and displaying information on them using ARkit
+[PsychoTestsAR](https://github.com/tomaszwilk1985/PsychoTestsAR) | 2019-04-03 | 0 |
 [Torq](https://github.com/aKANJx/Torq) | 2019-04-02 | 0 | iCarros Hackathon
-[ARObjectDetection](https://github.com/7haz/ARObjectDetection) | 2019-04-01 | 0 | Detecting cars part using CoreML and Vision and displaying information on them using ARkit
-[RecipleaseV1](https://github.com/vincentBoulanger/RecipleaseV1) | 2019-04-01 | 0 |
-[iOS](https://github.com/JB184351/iOS) | 2019-04-01 | 0 | App Helps users to find bowling locations and reserve and/or get directions
 [SkinCareApp](https://github.com/ani1512/SkinCareApp) | 2019-04-01 | 0 |
 [IdolML](https://github.com/isa130pull/IdolML) | 2019-04-01 | 0 |
 [foragr](https://github.com/joshua-isaac/foragr) | 2019-03-31 | 0 | A foraging application that utilizes object detection and machine learning in order to identify and differentiate verious types of plants and fungi.
@@ -71,12 +74,10 @@ Name | Last Updated | Stars | Description
 [SeeFood](https://github.com/tniraj7/SeeFood) | 2019-03-31 | 0 |
 [TrashBinCode](https://github.com/Ruqyai/TrashBinCode) | 2019-03-30 | 0 |  Using Tensorflow for training model to detect real time objects and recognize which type any trash belong
 [MobiDerma](https://github.com/Ojas-Chimane/MobiDerma) | 2019-03-30 | 0 | An iOS app that can detect skin related diseases using Tensorflow trained model
-[PsychoTestsAR](https://github.com/tomaszwilk1985/PsychoTestsAR) | 2019-03-29 | 0 |
-[Launcher_Termux](https://github.com/SharpAI/Launcher_Termux) | 2019-03-29 | 0 | The way to run linux on Android to use native OpenCL
 [watson-classify-train](https://github.com/bourdakos1/watson-classify-train) | 2019-03-29 | 0 | Train and classify images with Watson Visual Recognition
 [Android_MNIST](https://github.com/ZhengPhoenix/Android_MNIST) | 2019-03-29 | 0 |
 [ARPoseEstimation](https://github.com/MrinaliniU/ARPoseEstimation) | 2019-03-28 | 0 |
-[ASLTranslator](https://github.com/sahithr03/ASLTranslator) | 2019-03-28 | 0 |
+[ASLTranslator](https://github.com/sahithr03/ASLTranslator) | 2019-03-28 | 0 | An IOS app that relies on machine learning to detect words and sentences from sign language.
 [sculptml-ios-app-log](https://github.com/ngundotra/sculptml-ios-app-log) | 2019-03-27 | 0 | The source code for the SculptML iOS app
 [DigitRecognizer](https://github.com/kshitiz-kumar/DigitRecognizer) | 2019-03-25 | 0 | A ML trained model to recognize digits in an application
 [RTSP_Decoder_IJKPlayer](https://github.com/SharpAI/RTSP_Decoder_IJKPlayer) | 2019-03-25 | 0 |
@@ -125,7 +126,6 @@ Name | Last Updated | Stars | Description
 [MyFoodle](https://github.com/shramankar/MyFoodle) | 2019-02-21 | 0 | Foodle Project - Swift 5 Xcode 10.2 App to help donate and locate food
 [LeafDiseaseIdentifier](https://github.com/performsegue/LeafDiseaseIdentifier) | 2019-02-21 | 0 | A on device Deep learning model built using tensorflow and CoreML
 [WhatFlower---iOS12](https://github.com/IonutM1/WhatFlower---iOS12) | 2019-02-21 | 0 | WhatFlower app using CoreML
-[10_08_okushirokentaro](https://github.com/okushiro/10_08_okushirokentaro) | 2019-02-21 | 0 |
 [My-DL-App](https://github.com/arpitj07/My-DL-App) | 2019-02-21 | 0 | This repository contains code to deploy a tensorflow  model into an android app
 [EscapeRoom](https://github.com/matildadahlberg/EscapeRoom) | 2019-02-20 | 0 |
 [mfp-insurance](https://github.com/vittalpai/mfp-insurance) | 2019-02-20 | 0 |
@@ -246,29 +246,29 @@ Name | Last Updated | Stars | Description
 [ImageCaptioningAndroid](https://github.com/fringedroid/ImageCaptioningAndroid) | 2019-01-01 | 0 | Image captioning on Android
 [WhatFlower](https://github.com/nozomuplus/WhatFlower) | 2018-12-31 | 0 | Image Recognition App which tells the kind of flower using CoreML and Oxford 102
 [SeeFood](https://github.com/nozomuplus/SeeFood) | 2018-12-30 | 0 | Image Recognition App using CoreML and Inception v3
-
 ## Object Detection
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[SSDMobileNet_CoreML](https://github.com/vonholst/SSDMobileNet_CoreML) | 2019-01-09 | 115 | Real-time object-detection using SSD on Mobilenet on iOS using CoreML, exported using tf-coreml
-[flutter_tflite](https://github.com/shaqian/flutter_tflite) | 2019-04-01 | 89 | Flutter plugin for TensorFlow Lite
-[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 85 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
-[ml](https://github.com/dailystudio/ml) | 2019-02-11 | 46 | ML related stuff
+[SSDMobileNet_CoreML](https://github.com/vonholst/SSDMobileNet_CoreML) | 2019-01-09 | 116 | Real-time object-detection using SSD on Mobilenet on iOS using CoreML, exported using tf-coreml
+[flutter_tflite](https://github.com/shaqian/flutter_tflite) | 2019-04-07 | 94 | Flutter plugin for TensorFlow Lite
+[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 88 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
+[ml](https://github.com/dailystudio/ml) | 2019-02-11 | 47 | ML related stuff
 [tflite-react-native](https://github.com/shaqian/tflite-react-native) | 2019-03-17 | 13 | React Native library for TensorFlow Lite
 [glDelegateBench](https://github.com/freedomtan/glDelegateBench) | 2019-03-31 | 7 | quick and dirty inference time benchmark for TFLite gles delegate
 [webcam-detect-tflite](https://github.com/mattn/webcam-detect-tflite) | 2019-03-15 | 5 |
 [AI_Camera](https://github.com/SharpAI/AI_Camera) | 2019-03-26 | 4 | Connect Android Camera to DeepCamera, use your Android Mobile/Tablet as AI-Powered monitor to recognize people by face/human shape without rooting it. Behavior recognition is currently in design.
 [Machine-Learning-Inference-on-Mobile-Devices](https://github.com/anujdutt9/Machine-Learning-Inference-on-Mobile-Devices) | 2019-02-06 | 2 | Code and Presentation for the talk "Machine Learning Inference on Mobile Devices"
+[DeepCamera_Android](https://github.com/SharpAI/DeepCamera_Android) | 2019-04-05 | 1 | Run DeepCamera on Android.
 [explorer](https://github.com/AK-ayush/explorer) | 2019-03-25 | 1 |
 [roomtips](https://github.com/ChanningJacobs/roomtips) | 2019-03-20 | 1 |
 [Nanodegree-Machine-Learning](https://github.com/huyvnphan/Nanodegree-Machine-Learning) | 2019-03-01 | 1 | My projects for Machine Learning Nanodegree
 [SmartLens](https://github.com/aucd29/SmartLens) | 2019-02-15 | 1 | The SmartLens can detect object from Camera using Tensorflow Lite or Tensorflow on Mobile. The project had implemented by referring to three open sources in GitHub. My intention in this project was to compare the performance between Tensorflow Lite and Tensorflow on Mobile on Android phones.
 [yolov3-android-tflite](https://github.com/wics1224/yolov3-android-tflite) | 2019-01-24 | 1 | 这个工程实现了在android中使用tflite实现yolov3的darknet53和yolov3-tiny,我的tensorflow版本是tfnightly1.1320181224
 [ssdLiteForAndorid](https://github.com/CodeLpea/ssdLiteForAndorid) | 2019-01-17 | 1 | ssdlite模型在安卓中运行
+[BenchmarkTFLite](https://github.com/Leo-Neat/BenchmarkTFLite) | 2019-04-03 | 0 | A android application being developed to test differences in CNN algorithm inference performance on mobile devices.
+[ArduinoVision](https://github.com/RoboticsCourse/ArduinoVision) | 2019-04-02 | 0 |
 [BP](https://github.com/chovpr/BP) | 2019-04-02 | 0 |
-[ArduinoVision](https://github.com/RoboticsCourse/ArduinoVision) | 2019-03-31 | 0 |
-[Launcher_Termux](https://github.com/SharpAI/Launcher_Termux) | 2019-03-29 | 0 | The way to run linux on Android to use native OpenCL
 [tflite-dynamic](https://github.com/Jgfrausing/tflite-dynamic) | 2019-03-29 | 0 |
 [bottle-net](https://github.com/lemberg/bottle-net) | 2019-03-29 | 0 | for ML-service
 [RaspberryPi_TFLite_Qt](https://github.com/MechatronicsBlog/RaspberryPi_TFLite_Qt) | 2019-03-25 | 0 | Raspberry Pi, TensorFlow Lite and Qt/QML: object detection example
@@ -290,33 +290,35 @@ Name | Last Updated | Stars | Description
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
+[eventscan](https://github.com/eventscan/eventscan) | 2019-04-08 | 0 |
+[BenchmarkTFLite](https://github.com/Leo-Neat/BenchmarkTFLite) | 2019-04-03 | 0 | A android application being developed to test differences in CNN algorithm inference performance on mobile devices.
 [Digit-Classifier-App](https://github.com/ritik22agg/Digit-Classifier-App) | 2019-03-22 | 0 |
 [tflite-inference-code-for-lstm](https://github.com/youyou22222/tflite-inference-code-for-lstm) | 2019-02-13 | 0 |  A library written in c++ for running lstm tensorflow lite model on mobile devices
 ## Image Segmentation
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[JejuNet](https://github.com/tantara/JejuNet) | 2019-01-27 | 81 | Real-Time Video Segmentation on Mobile Devices with DeepLab V3+, MobileNet V2
-[ml](https://github.com/dailystudio/ml) | 2019-02-11 | 46 | ML related stuff
-[Metal-Practice](https://github.com/colin1994/Metal-Practice) | 2019-01-24 | 42 | The resources and source code for my XiaoZhuanLan series on image processing using Apple's Metal Api.
+[JejuNet](https://github.com/tantara/JejuNet) | 2019-01-27 | 83 | Real-Time Video Segmentation on Mobile Devices with DeepLab V3+, MobileNet V2
+[ml](https://github.com/dailystudio/ml) | 2019-02-11 | 47 | ML related stuff
+[Metal-Practice](https://github.com/colin1994/Metal-Practice) | 2019-01-24 | 43 | The resources and source code for my XiaoZhuanLan series on image processing using Apple's Metal Api.
 [iOS_DeepLab_segmentation](https://github.com/htong01/iOS_DeepLab_segmentation) | 2019-01-09 | 0 |
 ## Pose Estimation
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 85 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
-[PoseEstimationForMobile](https://github.com/edvardHua/PoseEstimationForMobile) | 2019-03-28 | 13 |  :dancer: Real-time single person pose estimation for Android and iOS.
-[tf2-mobile-pose-estimation](https://github.com/tucan9389/tf2-mobile-pose-estimation) | 2019-04-02 | 9 |  :dancer: Single pose estimation for iOS and android using TensorFlow 2.0
-[FaceConverter](https://github.com/taylorlu/FaceConverter) | 2019-02-23 | 5 | Face swap and 3D alignment from a single image based on PRNet
+[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 88 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
+[PoseEstimationForMobile](https://github.com/edvardHua/PoseEstimationForMobile) | 2019-04-03 | 25 |  :dancer: Real-time single person pose estimation for Android and iOS.
+[tf2-mobile-pose-estimation](https://github.com/tucan9389/tf2-mobile-pose-estimation) | 2019-04-05 | 10 |  :dancer: Single pose estimation for iOS and android using TensorFlow 2.0
+[FaceConverter](https://github.com/taylorlu/FaceConverter) | 2019-02-23 | 6 | Face swap and 3D alignment from a single image based on PRNet
 [ARML](https://github.com/giln/ARML) | 2019-02-22 | 4 | ARKit and CoreML fun
 [Body-Pose-Estimation-Android-gpu](https://github.com/dongseokYang/Body-Pose-Estimation-Android-gpu) | 2019-01-25 | 4 | Body Pose Estimation (Android gpu)
 [PoseEstimationForMobile](https://github.com/bolesyboy/PoseEstimationForMobile) | 2019-01-28 | 3 |
 [IOS-OpenPose](https://github.com/macro-dadt/IOS-OpenPose) | 2019-02-28 | 2 | port from https://github.com/CMU-Perceptual-Computing-Lab/openpose
 [Body_Pose_Estimation_Android](https://github.com/koomg9599/Body_Pose_Estimation_Android) | 2019-02-27 | 1 |
 [mac_posenet_desktop](https://github.com/DimmDell/mac_posenet_desktop) | 2018-12-29 | 1 | Desktop Mac program which applies converted to coreML foramt posenet tensorflow model
+[JacquardToolkit](https://github.com/calebrudnicki/JacquardToolkit) | 2019-04-06 | 0 | This is a development toolkit for the Levi's Jacquard.
 [PoseEstimationForMobileInJava](https://github.com/sauvignon1989/PoseEstimationForMobileInJava) | 2019-04-01 | 0 | Java Replica of PoseEstimationForMobile ( https://github.com/edvardHua/PoseEstimationForMobile )
 [ARPoseEstimation](https://github.com/MrinaliniU/ARPoseEstimation) | 2019-03-28 | 0 |
-[JacquardToolkit](https://github.com/calebrudnicki/JacquardToolkit) | 2019-03-27 | 0 | This is a development toolkit for the Levi's Jacquard.
 [TechniqueAnalysis](https://github.com/trevphil/TechniqueAnalysis) | 2019-03-02 | 0 | CocoaPod to analyze body motion and exercise technique
 [HandGestureRecognition-Ego-iOS](https://github.com/vasiliydumanov/HandGestureRecognition-Ego-iOS) | 2019-02-26 | 0 |
 [mobile_openpose](https://github.com/elbekri/mobile_openpose) | 2019-02-25 | 0 |
@@ -330,9 +332,9 @@ Name | Last Updated | Stars | Description
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[tutorials](https://github.com/onnx/tutorials) | 2019-03-29 | 834 | Tutorials for using ONNX
-[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 85 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
-[Metal-Practice](https://github.com/colin1994/Metal-Practice) | 2019-01-24 | 42 | The resources and source code for my XiaoZhuanLan series on image processing using Apple's Metal Api.
+[tutorials](https://github.com/onnx/tutorials) | 2019-04-03 | 846 | Tutorials for using ONNX
+[Awesome-ML](https://github.com/eugenebokhan/Awesome-ML) | 2019-03-02 | 88 | Discover, download, compile & launch different image processing & style transfer CoreML models on iOS.
+[Metal-Practice](https://github.com/colin1994/Metal-Practice) | 2019-01-24 | 43 | The resources and source code for my XiaoZhuanLan series on image processing using Apple's Metal Api.
 [Visualism](https://github.com/henry2423/Visualism) | 2019-02-01 | 3 | A Visual Style Transfer App with CoreML
 [phixer](https://github.com/nateemma/phixer) | 2019-03-27 | 1 | iOS App to apply filters to photos or camera feed. Some editing features
 [StyleArts](https://github.com/iOSDevLog/StyleArts) | 2019-01-06 | 1 | 风格迁移
@@ -341,9 +343,9 @@ Name | Last Updated | Stars | Description
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[facenet_mtcnn_to_mobile](https://github.com/jiangxiluning/facenet_mtcnn_to_mobile) | 2019-02-20 | 54 | convert facenet and mtcnn models from tensorflow to tensorflow lite and coreml （使用 TFLite 将 FaceNet 和 MTCNN 移植到移动端）
-[mobile_app_server](https://github.com/SharpAI/mobile_app_server) | 2019-03-29 | 2 | Mobile application for DeepCamera on Meteor.
-[MegaCode](https://github.com/rockbass2560/MegaCode) | 2019-04-01 | 1 | Sistema de enseñanza en programación para Android
+[facenet_mtcnn_to_mobile](https://github.com/jiangxiluning/facenet_mtcnn_to_mobile) | 2019-02-20 | 55 | convert facenet and mtcnn models from tensorflow to tensorflow lite and coreml （使用 TFLite 将 FaceNet 和 MTCNN 移植到移动端）
+[mobile_app_server](https://github.com/SharpAI/mobile_app_server) | 2019-04-03 | 2 | Mobile application for DeepCamera on Meteor.
+[MegaCode](https://github.com/rockbass2560/MegaCode) | 2019-04-09 | 1 | Sistema de enseñanza en programación para Android
 [FaceTrackingRealtime](https://github.com/shivaLegend/FaceTrackingRealtime) | 2019-03-21 | 1 | Face Tracking Realtime + Identify Face
 [sandbox](https://github.com/tomothumb/sandbox) | 2019-03-20 | 0 | A daily weekly monthly yearly something
 [face-id](https://github.com/pavel-zh/face-id) | 2019-02-06 | 0 |
@@ -362,7 +364,7 @@ Name | Last Updated | Stars | Description
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[mHealth-Android](https://github.com/AdamBOD/mHealth-Android) | 2019-03-31 | 0 |
+[mHealth-Android](https://github.com/AdamBOD/mHealth-Android) | 2019-04-06 | 0 |
 [EasyBay](https://github.com/Innovr3/EasyBay) | 2019-03-24 | 0 |
 [HouseSalesCoreML](https://github.com/frvazquez777/HouseSalesCoreML) | 2019-03-20 | 0 | Usually Core ML
 ## Audio Classification
@@ -395,12 +397,18 @@ Name | Last Updated | Stars | Description
 
 Name | Last Updated | Stars | Description
 ----- | ----- | ---: | -----
-[swift-sdk](https://github.com/watson-developer-cloud/swift-sdk) | 2019-03-29 | 839 | :iphone: The Watson Swift SDK enables developers to quickly add Watson Cognitive Computing services to their Swift applications.
-[go-tflite](https://github.com/mattn/go-tflite) | 2019-03-28 | 94 | Go binding for TensorFlow Lite
+[swift-sdk](https://github.com/watson-developer-cloud/swift-sdk) | 2019-04-08 | 841 | :iphone: The Watson Swift SDK enables developers to quickly add Watson Cognitive Computing services to their Swift applications.
+[Lumina](https://github.com/dokun1/Lumina) | 2019-04-05 | 604 | A camera designed in Swift for easily integrating CoreML models - as well as image streaming, QR/Barcode detection, and many other features
+[go-tflite](https://github.com/mattn/go-tflite) | 2019-04-03 | 96 | Go binding for TensorFlow Lite
 [Machine-Learning-with-Core-ML](https://github.com/PacktPublishing/Machine-Learning-with-Core-ML) | 2019-03-19 | 21 | Machine Learning with Core ML, published by Packt
 [13048-Rover-Ruckus](https://github.com/Dwight-Englewood/13048-Rover-Ruckus) | 2019-04-01 | 3 | FTC Team 13048's Programming Directory
 [GravityRush](https://github.com/TrebleStick/GravityRush) | 2019-03-29 | 3 | Gravity Rush - Mobile game for muscle rehabilitaion
-[DjiDronePilot](https://github.com/hatati/DjiDronePilot) | 2019-04-01 | 0 |
+[cardscan-ios](https://github.com/getbouncer/cardscan-ios) | 2019-04-08 | 1 | A library for scanning credit and debit cards
+[DjiDronePilot](https://github.com/hatati/DjiDronePilot) | 2019-04-09 | 0 |
+[RL-Robot-Code](https://github.com/daniellawson9999/RL-Robot-Code) | 2019-04-09 | 0 | The second version of capstone code repository
+[MLSimpsonsClassifier](https://github.com/MarioCode/MLSimpsonsClassifier) | 2019-04-08 | 0 | Sample App to classify Simpsons using Keras
+[STARified-SDK](https://github.com/highend3d/STARified-SDK) | 2019-04-06 | 0 | STARified SDK for easy integration
+[tflite-sin](https://github.com/mattn/tflite-sin) | 2019-04-05 | 0 |
 [ImageTester](https://github.com/RoboticsCourse/ImageTester) | 2019-03-31 | 0 |
 [lofi](https://github.com/m202a-winter19-lofi/lofi) | 2019-03-25 | 0 | Android app implementing the LOFI project
 [WWDC-2019-Neural-Networks](https://github.com/ozanmirza1/WWDC-2019-Neural-Networks) | 2019-03-23 | 0 | This is my submission for WWDC 2019. It features numerous types of recognition through the CoreML, and Vision framework.
