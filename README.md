@@ -1,4 +1,4 @@
-# Fritz Models
+# Fritz AI Models
 A collection of machine and deep learning models designed to run on mobile devices.
 
 Models in this repository contain code and utilities for training models as well as converting them to mobile-friendly formats like Core ML, TensorFlow Mobile, and TensorFlow Lite.
