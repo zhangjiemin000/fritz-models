@@ -6,7 +6,6 @@ Models in this repository contain code and utilities for training models as well
 ## Fritz AI
 Fritz AI helps you teach your applications how to see, hear, feel, think, and sense. Create ML-powered features in your mobile apps for both Android and iOS. Start with our ready-to-use feature APIs or connect and deploy your own custom models.
 
-## Get Started 
 [Sign up](https://app.fritz.ai/register) for an account on Fritz AI in order to get started with machine learning in your apps.
 
 ## Models
