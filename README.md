@@ -50,5 +50,5 @@ GIT_LFS_SKIP_SMUDGE=1 git clone ...
 ## Help
 For any questions or issues, you can:
 - Submit an issue on this repo
-- Go to our[Help Center](https://docs.fritz.ai/help-center/index.html)
+- Go to our [Help Center](https://docs.fritz.ai/help-center/index.html)
 - Message us directly in [Slack](https://heartbeat-by-fritz.slack.com/join/shared_invite/enQtNTY5NDM2MTQwMTgwLTAyODE3MmQzZjU2NWE5MDNmYTgwM2E1MjU5Y2Y2NmI2YTlkMTMwZTAwYTAwMzQ5NzQ2NDBhZjhmYjU2YWY3OGU)
