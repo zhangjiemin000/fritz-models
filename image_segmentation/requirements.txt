@@ -3,7 +3,7 @@ h5py==2.7.1
 numpy==1.14.3
 matplotlib==2.2.2
 scikit-image==0.13.1
-Pillow==5.1.0
+Pillow==6.2.0
 six==1.10.0
 # Forked coremltools which includes fix for bilinear upsampling.
 # Update this after it has been merged into master.
