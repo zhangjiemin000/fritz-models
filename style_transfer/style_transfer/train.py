@@ -1,7 +1,9 @@
 import argparse
 import logging
-
+import ssl
 from style_transfer import trainer
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('train_network')
